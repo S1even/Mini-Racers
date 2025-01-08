@@ -3,6 +3,7 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv").config();
 const port = 5500;
 const app = express();
+const userRoutes = require("./routes/user.routes");
 
 // Connexion DB
 connectDB();
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // NAMESPACES
-app.use("/user", require("./routes/user.routes"))
+app.use("/api/auth", userRoutes);
 
 // Start a server
 app.listen(port, () => console.log("Le serveur a démarré au port " + port))

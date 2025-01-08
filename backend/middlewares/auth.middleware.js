@@ -15,7 +15,7 @@ const authenticateUser = async (req, res, next) => {
             return res.status(404).json({ message: "Utilisateur non trouvé." });
         }
 
-        if (!user.isEmailConfirmed) {
+        if (!user.isEmailconfirmed) {
             return res.status(403).json({ message: "Email non confirmé." });
         }
 
