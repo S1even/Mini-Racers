@@ -18,10 +18,10 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true 
         },
-        confirmpassword: {
-            type: String,
-            required: true
-        }
+        isEmailconfirmed: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: true,

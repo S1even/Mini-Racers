@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // NAMESPACES
-
+app.use("/user", require("./routes/user.routes"))
 
 // Start a server
 app.listen(port, () => console.log("Le serveur a démarré au port " + port))
