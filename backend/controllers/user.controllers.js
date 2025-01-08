@@ -9,10 +9,8 @@ module.exports.register = async (req, res) => {
         const { username, email, password, confirmpassword } = req.body;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (emailRegex.test(email)) {
-            console.log("L'adresse email est valide !");
-        } else {
-            console.log("L'adresse email est invalide.");
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ message: "L'adresse email est invalide." });
         }
 
         if (password !== confirmpassword) {
