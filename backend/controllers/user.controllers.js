@@ -200,6 +200,11 @@ module.exports.deleteUser = async (req, res) => {
             return res.status(404).json({ message: "Utilisateur non trouvé" });
         }
 
+        const token = req.headers.authorization.split(" ")[1];
+
+        await BlacklistModel.create({ token });
+        console.log(`Token in blacklist: ${token}`);
+
         await UserModel.findByIdAndDelete(userId);
 
         res.status(200).json({ message: "Utilisateur supprimé avec succès" });
@@ -217,6 +222,7 @@ module.exports.logout = async (req, res) => {
 
         // Ajoute le token à la blacklist
         await BlacklistModel.create({ token });
+        console.log(`Token in blacklist: ${token}`);
 
         res.status(200).json({ message: "Déconnexion réussie. Token invalidé." });
     } catch (error) {
