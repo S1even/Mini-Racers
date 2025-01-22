@@ -19,4 +19,4 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/auth", userRoutes);
 
 // Start a server
-app.listen(port, () => console.log("Le serveur a démarré au port " + port))
+app.listen(port, () => console.log("Server started at port " + port))

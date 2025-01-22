@@ -5,7 +5,7 @@ module.exports.confirmEmail = async (req, res) => {
     const { token } = req.query;
 
     if (!token) {
-        return res.status(400).json({ message: 'Token manquant' });
+        return res.status(400).json({ message: 'Missing Token' });
     }
 
     try {
@@ -13,7 +13,7 @@ module.exports.confirmEmail = async (req, res) => {
         const user = await UserModel.findById(decoded.userId);
 
         if (!user) {
-            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+            return res.status(404).json({ message: 'User not found' });
         }
 
         // Mise à jour de l'utilisateur pour confirmer l'email
@@ -22,11 +22,11 @@ module.exports.confirmEmail = async (req, res) => {
         // Sauvegarde du document utilisateur
         const updatedUser = await user.save();
 
-        console.log("Utilisateur mis à jour :", updatedUser);  // Ajoutez un log pour vérifier le retour
+        console.log("User updated :", updatedUser);  // Ajoutez un log pour vérifier le retour
 
-        return res.status(200).json({ message: 'Email confirmé avec succès' });
+        return res.status(200).json({ message: 'Email confirmed successfully' });
     } catch (error) {
-        console.error("Erreur lors de la confirmation de l'email :", error);
-        return res.status(500).json({ message: 'Erreur interne du serveur' });
+        console.error("Error confirming email :", error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 };

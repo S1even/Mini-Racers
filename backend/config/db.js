@@ -4,9 +4,9 @@ const connectDB = async () => {
     try {
         mongoose.set("strictQuery", false);
         await mongoose.connect(process.env.MONGO_URI);
-        console.log("Mongo connecté :)");
+        console.log("Mongo connected :)");
     } catch (err) {
-        console.error("Erreur lors de la connexion à MongoDB :", err);
+        console.error("Error connecting to MongoDB:", err);
         process.exit(1); // Stop the application if we have critical error
     }
 };
