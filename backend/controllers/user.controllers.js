@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const nodemailer = require("nodemailer");
 const { confirmEmail } = require("./email.controllers");
+const BlacklistModel = require("../models/blacklist.model");
 
 module.exports.register = async (req, res) => {
     try {
@@ -204,5 +205,21 @@ module.exports.deleteUser = async (req, res) => {
         res.status(200).json({ message: "Utilisateur supprimé avec succès" });
     } catch (error) {
         res.status(500).json({ message: "Erreur lors de la suppression", error: error.message });
+    }
+};
+
+module.exports.logout = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) {
+            return res.status(400).json({ message: "Token manquant." });
+        }
+
+        // Ajoute le token à la blacklist
+        await BlacklistModel.create({ token });
+
+        res.status(200).json({ message: "Déconnexion réussie. Token invalidé." });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la déconnexion", error: error.message });
     }
 };

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.model");
+const BlacklistModel = require("../models/blacklist.model");
 
 const authenticateUser = async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
@@ -8,6 +9,11 @@ const authenticateUser = async (req, res, next) => {
     }
 
     try {
+        const isBlacklisted = await BlacklistModel.findOne({ token });
+        if (isBlacklisted) {
+            return res.status(401).json({ message: "Ce token est expiré ou invalidé." });
+        }
+
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await UserModel.findById(decoded.id);
 
@@ -19,12 +25,11 @@ const authenticateUser = async (req, res, next) => {
             return res.status(403).json({ message: "Email non confirmé." });
         }
 
-        req.user = user; // Attache l'utilisateur à la requête
+        req.user = user;
         next();
     } catch (error) {
         res.status(401).json({ message: "Token invalide." });
     }
 };
-
 
 module.exports = authenticateUser;
