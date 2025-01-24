@@ -83,7 +83,7 @@ module.exports.login = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1d" }
         );
-
+        console.log({ message: user})
         res.status(200).json({ message: "Connection successful", token });
     } catch (error) {
         res.status(500).json({ message: "Error connecting", error: error.message });
