@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../views/Login.vue';
+import Register from '@/views/register.vue';
 
 const routes = [
   {
@@ -10,7 +11,14 @@ const routes = [
       title: 'Login - Mini-Racers'
     }
   },
-  // Autres routes ici
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      title: 'Register - Mini-Racers'
+    }
+  },
 ];
 
 const router = createRouter({
