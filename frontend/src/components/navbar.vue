@@ -37,29 +37,16 @@
   </template>
   
   
-  <script>
+  <script setup>
   import { ref } from "vue";
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { RouterLink } from "vue-router";
+  import { RouterLink } from "vue-router";
   
-  export default {
-    components: {
-      FontAwesomeIcon,
-    },
-    setup() {
-      const isMenuOpen = ref(false);
-      const isHovered = ref(false); // Nouvelle variable pour gérer l'effet "bounce"
+  const isMenuOpen = ref(false);
+  const isHovered = ref(false);
   
-      const toggleMenu = () => {
-        isMenuOpen.value = !isMenuOpen.value;
-      };
-  
-      return {
-        isMenuOpen,
-        isHovered,
-        toggleMenu,
-      };
-    },
+  const toggleMenu = () => {
+    isMenuOpen.value = !isMenuOpen.value;
   };
   </script>
   
