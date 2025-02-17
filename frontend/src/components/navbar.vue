@@ -51,12 +51,6 @@
   </script>
   
 <style scoped>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-}
   
 li {
     list-style: none;
@@ -138,6 +132,7 @@ header {
     border-radius: 10px;
     overflow: hidden;
     transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 9999;
 }
 
 .dropdown_menu.open {
