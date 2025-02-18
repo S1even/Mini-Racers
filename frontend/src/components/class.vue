@@ -1,97 +1,83 @@
 <style scoped>
-.container {
-  overflow-x: auto;
-  /* Seulement pour l'axe X */
-  display: flex;
-  flex-wrap: nowrap;
-  /* Evite que les éléments ne se décalent sur deux lignes */
-  scroll-snap-type: x mandatory;
-  width: 70%;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
 .card {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-  border-radius: 10px;
-  padding: 2rem;
-  margin: 1rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  /* Centrer le contenu */
-  justify-content: center;
-  flex-direction: column;
-  transition: all 0.3s ease-in-out;
-  /* Animation pour rendre l'interaction plus fluide */
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  margin-left: 5%;
+  position: relative;
+  padding: 0;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
 }
 
 .card-image {
   width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
+  height: 100%;
+  border-radius: 20px;
 }
 
-.title {
+.card-details {
+  color: black;
+  position: absolute;
+  /* Placer les détails par-dessus l'image */
+  bottom: 10px;
+  /* Ajuster la position verticale des détails */
   width: 100%;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  height: 100%;
   text-align: center;
-  margin-top: 1.5rem;
-  font-size: 25px;
+  background: rgba(245, 245, 245, 0.5);
+  /* Fond semi-transparent pour mieux voir le texte */
+  padding: 0.5em;
+  /* Ajouter un peu d'espace autour du texte */
+  box-sizing: border-box;
+  /* Inclure le padding dans les dimensions de l'élément */
+  border-radius: 20px;
+  bottom: 0px;
+}
+
+.card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  height: 20%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #d67d91;
+  color: #fff;
+  font-size: 1rem;
+  padding: .3rem 0.6rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+}
+
+/*Text*/
+.text-title {
+  font-size: 1.5em;
   font-weight: bold;
-  color: #ffff;
-  text-shadow: 2px 2px 4px grey;
-  max-width: 100%;
-  /* Evite que le titre ne dépasse */
+}
+
+/*Hover*/
+.card:hover {
+  border-color: #d67d91;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
 }
 </style>
 
 <template>
-  <div class="container">
-    <div class="card">
-      <img src="@/assets/ClassA.webp" class="card-image" loading="lazy">
-      <p class="title">
-        Class A
-      </p>
+  <div class="card">
+    <img src="@/assets/ClassA.webp" alt="Card image" class="card-image">
+    <div class="card-details">
+      <p class="text-title">Class A</p>
     </div>
-    <div class="card">
-      <img src="@/assets/ClassB.webp" class="card-image" loading="lazy">
-      <p class="title">
-        Class B
-      </p>
-    </div>
-    <div class="card">
-      <img src="@/assets/Classcmenu.webp" class="card-image" loading="lazy">
-      <p class="title">
-        Class C
-      </p>
-    </div>
-
-    <div class="card">
-      <img src="@/assets/Classd.webp" class="card-image" loading="lazy">
-      <p class="title">
-        Class D
-      </p>
-    </div>
-
-    <div class="card">
-      <img src="@/assets/ClassE.webp" class="card-image" loading="lazy">
-      <p class="title">
-        Class E
-      </p>
-    </div>
-
-    <div class="card">
-      <img src="@/assets/Extra.webp" class="card-image" loading="lazy">
-      <p class="title">
-        Extras
-      </p>
-    </div>
+    <button class="card-button">More info</button>
   </div>
 </template>

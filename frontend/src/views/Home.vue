@@ -3,13 +3,11 @@
     <Navbar />
     <Carte />
     <Download />
-    <Class />
   </div>
 </template>
 
 <script>
 import Carte from '@/components/carte.vue';
-import Class from '@/components/class.vue';
 import Download from '@/components/download.vue';
 import Navbar from '@/components/navbar.vue';
 
@@ -18,7 +16,6 @@ export default {
   components: {
     Navbar,
     Carte,
-    Class,
     Download,
   },
 };

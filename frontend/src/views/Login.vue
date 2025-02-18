@@ -1,110 +1,96 @@
 <template>
-  <div class="login-background">
-    <div class="login-container">
-      <div class="login-box">
-        <h1>Mini-Racers</h1>
-        <form @submit.prevent="handleLogin">
-          <div class="user-box">
-            <input type="email" id="email" v-model="email" required />
-            <label for="email">Email</label>
-          </div>
-          <div class="user-box">
-            <input type="password" id="password" v-model="password" required />
-            <label for="password">Password</label>
-          </div>
-          <a href="#" @click="handleLogin">
-            Connexion
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </a>
-        </form>
-        <p>Not registered yet? <router-link to="/register" class="a2">Register</router-link></p>
+  <div class="home-page">
+    <Navbar />
+    <div class="login-background">
+      <div class="login-container">
+        <div class="login-box">
+          <h1>Mini-Racers</h1>
+          <form @submit.prevent="handleLogin">
+            <div class="user-box">
+              <input type="email" id="email" v-model="email" required />
+              <label for="email">Email</label>
+            </div>
+            <div class="user-box">
+              <input type="password" id="password" v-model="password" required />
+              <label for="password">Password</label>
+            </div>
+            <button type="submit" class="login-button">
+              Connexion
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </form>
+          <p>Not registered yet? <router-link to="/register" class="register-link">Register</router-link></p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import Navbar from '@/components/navbar.vue';
 import axios from 'axios';
 
-export default {
-  name: 'Login',
-  data() {
-    return {
-      email: '',
-      password: '',
-      errorMessage: '',
-    };
-  },
-  methods: {
-    async handleLogin() {
-      try {
-        const response = await axios.post('http://localhost:5500/api/auth/login', {
-          email: this.email,
-          password: this.password,
-        });
-        alert('Connexion réussie !');
-        console.log(response.data); // Gérer la réponse, ex : token
-      } catch (error) {
-        this.errorMessage = "Email ou mot de passe incorrect.";
-      }
-    },
-  },
+const email = ref('');
+const password = ref('');
+const errorMessage = ref('');
+
+const handleLogin = async () => {
+  try {
+    const response = await axios.post('http://localhost:5500/api/auth/login', {
+      email: email.value,
+      password: password.value,
+    });
+
+    if (!response.data.isEmailConfirmed) {
+      errorMessage.value = "Check your adress mail"
+      return;
+    }
+
+    alert('Connexion réussie !');
+    console.log(response.data); // Gérer la réponse, ex : token
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      errorMessage.value = "Email ou mot de passe incorrect.";
+    } else {
+      errorMessage.value = "Une erreur est survenue. Veuillez réessayer"
+    }
+  }
 };
 </script>
 
 <style scoped>
-/* From Uiverse.io by glisovic01 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Empêche le défilement horizontal */
-  font-family: 'Arial', sans-serif; /* Typographie moderne */
-}
-
-.login-background {
-  background-image: url('@/assets/background.png'); /* Assure-toi que le chemin est correct */
+.home-page {
+  height: 100vh;
+  background-image: url('@/assets/Designer2.png');
   background-size: cover;
   background-position: center;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-  top: 0; /* Commence dès le haut de la page */
-}
-
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  background-color: #000;
 }
 
 .login-box {
   width: 400px;
   padding: 40px;
-  margin: 20px auto;
-  background: rgba(0,0,0,.9);
+  margin: 50px auto;
+  background: rgba(0, 0, 0, .9);
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px;
 }
 
 .login-box h1 {
   margin-bottom: 20px;
-  text-align: center; /* Centre le titre horizontalement */
-  font-size: 2rem; /* Agrandit le texte */
-  font-weight: bold; /* Rend le texte en gras */
-  background: linear-gradient(to bottom, #488eff, #d81d65); /* Dégradé de bleu du haut vers le bas */
+  text-align: center;
+  /* Centre le titre horizontalement */
+  font-size: 2rem;
+  /* Agrandit le texte */
+  font-weight: bold;
+  /* Rend le texte en gras */
+  background: linear-gradient(to right, #d67d91, #feb47b);
+  /* Dégradé de bleu du haut vers le bas */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -146,8 +132,8 @@ html, body {
   transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
   top: -20px;
   left: 0;
   color: #fff;
@@ -190,10 +176,12 @@ html, body {
 }
 
 @keyframes btn-anim1 {
-  0% {
-    left: -100%;
+  0 % {
+    left: -100 %;
   }
-  50%,100% {
+
+  50%,
+  100% {
     left: 100%;
   }
 }
@@ -209,10 +197,12 @@ html, body {
 }
 
 @keyframes btn-anim2 {
-  0% {
-    top: -100%;
+  0 % {
+    top: -100 %;
   }
-  50%,100% {
+
+  50%,
+  100% {
     top: 100%;
   }
 }
@@ -228,10 +218,12 @@ html, body {
 }
 
 @keyframes btn-anim3 {
-  0% {
-    right: -100%;
+  0 % {
+    right: -100 %;
   }
-  50%,100% {
+
+  50%,
+  100% {
     right: 100%;
   }
 }
@@ -247,10 +239,12 @@ html, body {
 }
 
 @keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
+  0 % {
+    bottom: -100 %;
   }
-  50%,100% {
+
+  50%,
+  100% {
     bottom: 100%;
   }
 }
