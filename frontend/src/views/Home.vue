@@ -6,19 +6,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Carte from '@/components/carte.vue';
 import Download from '@/components/download.vue';
 import Navbar from '@/components/navbar.vue';
-
-export default {
-  name: 'Home',
-  components: {
-    Navbar,
-    Carte,
-    Download,
-  },
-};
 </script>
 
 <style scoped>

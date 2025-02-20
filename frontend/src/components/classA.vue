@@ -1,16 +1,19 @@
 <style scoped>
 .card {
-  width: 150px;
+  width: 180px;
+  /* Assurez-vous que les cartes occupent toute la largeur disponible */
   height: 150px;
   border-radius: 20px;
   background: #f5f5f5;
-  margin-left: 5%;
   position: relative;
   padding: 0;
-  border: 2px solid #c3c6ce;
+  border: 2px solid #54C3EA;
   transition: 0.5s ease-out;
   overflow: visible;
+  margin: 50px 50px;
+  /* Supprimez les marges ici */
 }
+
 
 .card-image {
   width: 100%;
@@ -19,7 +22,7 @@
 }
 
 .card-details {
-  color: black;
+  color: rgb(0, 0, 0);
   position: absolute;
   /* Placer les détails par-dessus l'image */
   bottom: 10px;
@@ -74,10 +77,24 @@
 
 <template>
   <div class="card">
-    <img src="@/assets/ClassA.webp" alt="Card image" class="card-image">
+    <img :src="imageSrc" alt="Card image" class="card-image">
     <div class="card-details">
-      <p class="text-title">Class A</p>
+      <p class="text-title">{{ className }}</p>
     </div>
     <button class="card-button">More info</button>
   </div>
 </template>
+
+<script setup>
+import { computed } from 'vue';
+
+
+const props = defineProps({
+  className: String,
+  image: String,
+});
+
+const imageSrc = computed(() => {
+  return new URL(`../assets/${props.image}.webp`, import.meta.url).href;
+});
+</script>

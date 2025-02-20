@@ -11,7 +11,7 @@
   transition: 0.5s;
   transition-property: box-shadow;
   position: fixed;
-  bottom: 115px;
+  bottom: 120px;
   left: 50%;
   /* Centrer horizontalement */
   transform: translateX(-50%);
@@ -19,15 +19,15 @@
 }
 
 .shadow__btn {
-  background: #d67d91;
-  box-shadow: 0 0 25px #d67d91;
+  background: #3788f0;
+  box-shadow: 0 0 25px #3788f0;
 }
 
 .shadow__btn:hover {
-  box-shadow: 0 0 5px #d67d91,
-    0 0 25px #d67d91,
-    0 0 50px #d67d91,
-    0 0 100px #d67d91;
+  box-shadow: 0 0 5px #3788f0,
+    0 0 25px #3788f0,
+    0 0 50px #3788f0,
+    0 0 100px #3788f0;
 }
 
 /* Responsive styles for phones */

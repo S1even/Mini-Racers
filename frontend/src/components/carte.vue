@@ -1,27 +1,35 @@
 <template>
-  <div class="card-container">
+  <div :class="['card-container', layoutclass]">
     <div class="card">
       <img src="@/assets/mapsteven.png" class="card-image" loading="lazy">
       <div class="card__content">
         <p class="card__title">Speed Moutain</p>
-        <p class="card__description">Une carte crée par Steven, proposant un circuit
-          avec des virages bien réalisés. La vitesse ne vous fera pas peur sur ce parcours, où chaque
-          virage est conçu pour défier les amateurs de sensations fortes. Préparez-vous à vivre une
-          expérience excitante !</p>
+        <p class="card__description">A track designed by Steven, featuring a well-crafted circuit with expertly
+          engineered turns. Speed won't scare you on this course, where every corner is built to challenge
+          thrill-seekers. Get ready for an exhilarating experience!</p>
       </div>
     </div>
     <div class="card">
       <img src="@/assets/mapmorgan.png" class="card-image" loading="lazy">
       <div class="card__content">
         <p class="card__title">Turn of city</p>
-        <p class="card__description">Une carte fun, crée par Morgan. Ce circuit
-          est un véritable tourbillon de virages inattendus et de rebondissements surprenants. Il combine adrénaline et
-          fun à chaque instant, avec une conduite débridée qui saura ravir ceux qui aiment les sensations fortes et
-          l'imprévu. Préparez-vous à un défi excitant et délirant !</p>
+        <p class="card__description">A fun track designed by Morgan, featuring a whirlwind of unexpected turns and
+          thrilling surprises. This circuit blends adrenaline and excitement at every moment, offering a wild ride that
+          will delight thrill-seekers and lovers of the unexpected. Get ready for a crazy and exhilarating challenge !
+        </p>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  layoutclass: {
+    type: String,
+    default: ''
+  }
+});
+</script>
 
 <style scoped>
 .card-container {
@@ -92,7 +100,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: -1;

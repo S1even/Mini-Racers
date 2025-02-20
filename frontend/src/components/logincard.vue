@@ -15,6 +15,7 @@
                 <span></span>
                 <span></span>
                 <span></span>
+                <span></span>
                 Submit
             </button>
         </form>
@@ -24,7 +25,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
     email: String,
@@ -191,14 +192,14 @@ const handleSubmit = () => {
     }
 }
 
-@login-box form button span:nth-child(3) {
+.login-box form button span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
     height: 2px;
     background: linear-gradient(270deg, transparent, #fff);
     animation: btn-anim3 1.5s linear infinite;
-    animation-delay: .75s
+    animation-delay: .75s;
 }
 
 @keyframes btn-anim3 {
