@@ -77,7 +77,7 @@
 
 <template>
   <div class="card">
-    <img :src="imageSrc" alt="Card image" class="card-image">
+    <img :src="imageSrc" alt="Card image" class="card-image" loading="lazy">
     <div class="card-details">
       <p class="text-title">{{ className }}</p>
     </div>

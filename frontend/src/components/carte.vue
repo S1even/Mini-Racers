@@ -1,47 +1,30 @@
 <template>
-  <div :class="['card-container', layoutclass]">
+  <div>
     <div class="card">
-      <img src="@/assets/mapsteven.png" class="card-image" loading="lazy">
+      <img :src="imageSrc" alt="Card image" class="card-image" loading="lazy">
       <div class="card__content">
-        <p class="card__title">Speed Moutain</p>
-        <p class="card__description">A track designed by Steven, featuring a well-crafted circuit with expertly
-          engineered turns. Speed won't scare you on this course, where every corner is built to challenge
-          thrill-seekers. Get ready for an exhilarating experience!</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="@/assets/mapmorgan.png" class="card-image" loading="lazy">
-      <div class="card__content">
-        <p class="card__title">Turn of city</p>
-        <p class="card__description">A fun track designed by Morgan, featuring a whirlwind of unexpected turns and
-          thrilling surprises. This circuit blends adrenaline and excitement at every moment, offering a wild ride that
-          will delight thrill-seekers and lovers of the unexpected. Get ready for a crazy and exhilarating challenge !
-        </p>
+        <p class="card__title">{{ title }}</p>
+        <p class="card__description">{{ description }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
-  layoutclass: {
-    type: String,
-    default: ''
-  }
+import { computed } from 'vue';
+
+const props_carte = defineProps({
+  title: String,
+  description: String,
+  image: String,
+});
+
+const imageSrc = computed(() => {
+  return new URL(`../assets/${props_carte.image}.png`, import.meta.url).href;
 });
 </script>
 
 <style scoped>
-.card-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50vh;
-  margin-left: 15vh;
-  margin-right: 15vh;
-  gap: 20px;
-}
-
 .card {
   position: relative;
   width: 300px;

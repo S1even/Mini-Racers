@@ -16,8 +16,14 @@
     </div>
     <div class="Mappage">
         <h1 class="textclass">LIST OF MAPS</h1>
-        <Carte layoutclass="column-layout" />
+        <div class="carte-container">
+            <Carte v-for="(carte, index) in cartes" :title="carte.carteName" :description="carte.carteDescription"
+                :image="carte.image" :key="index" :class="'cartes-' + index" />
+        </div>
         <carousel />
+    </div>
+    <div>
+        <Footer />
     </div>
 </template>
 
@@ -26,6 +32,7 @@ import Carte from '@/components/carte.vue';
 import Class from '@/components/classA.vue';
 import Navbar from '@/components/navbar.vue';
 import carousel from '@/components/carousel.vue';
+import Footer from '@/components/footer.vue';
 
 const cards = [
     {
@@ -51,6 +58,19 @@ const cards = [
     {
         className: 'Class Extra',
         image: 'Extra',
+    },
+];
+
+const cartes = [
+    {
+        carteName: 'Speed Moutain',
+        carteDescription: "A track designed by Steven, featuring a well-crafted circuit with expertly engineered turns. Speed won't scare you on this course, where every corner is built to challenge thrill-seekers. Get ready for an exhilarating experience!",
+        image: 'mapsteven',
+    },
+    {
+        carteName: 'Turn Of City',
+        carteDescription: "A fun track designed by Morgan, featuring a whirlwind of unexpected turns and thrilling surprises. This circuit blends adrenaline and excitement at every moment, offering a wild ride that will delight thrill-seekers and lovers of the unexpected. Get ready for a crazy and exhilarating challenge !",
+        image: 'mapmorgan',
     },
 ];
 </script>
@@ -116,14 +136,15 @@ const cards = [
 
 }
 
-.column-layout {
+.carte-container {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 50px;
     /* Ajustez cette valeur pour contrôler l'espacement vertical */
-    margin-left: -200px;
+    margin-left: 30px;
+    padding-bottom: 100px;
     position: relative;
-    top: 55px;
+    top: 20px;
 }
 
 

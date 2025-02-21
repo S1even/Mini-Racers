@@ -10,8 +10,8 @@
   text-transform: uppercase;
   transition: 0.5s;
   transition-property: box-shadow;
-  position: fixed;
-  bottom: 120px;
+  position: relative;
+  bottom: -250px;
   left: 50%;
   /* Centrer horizontalement */
   transform: translateX(-50%);
@@ -35,7 +35,7 @@
   .shadow__btn {
     font-size: 15px;
     padding: 8px 16px;
-    bottom: 80px;
+    bottom: -250px;
     /* Ajuste l'espace en bas pour les petits écrans */
   }
 }
@@ -44,7 +44,7 @@
   .shadow__btn {
     font-size: 14px;
     padding: 7px 14px;
-    bottom: 60px;
+    bottom: -250px;
     /* Ajuste l'espace en bas pour les très petits écrans */
   }
 }
