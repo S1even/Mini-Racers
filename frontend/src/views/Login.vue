@@ -4,6 +4,9 @@
     <LoginCard :email="email" :password="password" :errorMessage="errorMessage" @update:email="email = $event"
       @update:password="password = $event" @submit="handleLogin" />
   </div>
+  <div>
+    <Footer />
+  </div>
 </template>
 
 <script setup>
@@ -11,6 +14,7 @@ import { ref } from 'vue';
 import Navbar from '@/components/navbar.vue';
 import axios from 'axios';
 import LoginCard from '@/components/logincard.vue';
+import Footer from '@/components/footer.vue';
 import router from '@/router';
 
 const email = ref('');

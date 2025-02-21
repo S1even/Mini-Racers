@@ -63,13 +63,13 @@ const cards = [
 
 const cartes = [
     {
-        carteName: 'Speed Moutain',
+        carteName: 'Speed Mountain',
         carteDescription: "A track designed by Steven, featuring a well-crafted circuit with expertly engineered turns. Speed won't scare you on this course, where every corner is built to challenge thrill-seekers. Get ready for an exhilarating experience!",
         image: 'mapsteven',
     },
     {
         carteName: 'Turn Of City',
-        carteDescription: "A fun track designed by Morgan, featuring a whirlwind of unexpected turns and thrilling surprises. This circuit blends adrenaline and excitement at every moment, offering a wild ride that will delight thrill-seekers and lovers of the unexpected. Get ready for a crazy and exhilarating challenge !",
+        carteDescription: "A fun track designed by Morgan, featuring a whirlwind of unexpected turns and thrilling surprises. This circuit blends adrenaline and excitement at every moment, offering a wild ride that will delight thrill-seekers and lovers of the unexpected. Get ready for a crazy and exhilarating challenge!",
         image: 'mapmorgan',
     },
 ];
@@ -106,7 +106,7 @@ const cartes = [
 
 .Homepage p {
     text-align: center;
-    color: #fff
+    color: #fff;
 }
 
 .textclass {
@@ -115,17 +115,19 @@ const cartes = [
     text-align: center;
     color: #fff;
     position: relative;
-    top: 15px
+    top: 15px;
 }
 
 .card-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
     /* Ajustez cette valeur pour plus ou moins d'espacement */
-    max-width: 900px;
+    max-width: 800px;
     /* Augmentez la largeur totale si nécessaire */
     margin: auto;
+    padding-top: 50px;
 }
 
 .Mappage {
@@ -133,7 +135,6 @@ const cartes = [
     background-size: cover;
     background-position: center;
     height: 60vh;
-
 }
 
 .carte-container {
@@ -147,10 +148,98 @@ const cartes = [
     top: 20px;
 }
 
-
+/* Réactivité */
 @media (max-width: 768px) {
     .card-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        /* Centrer les cartes */
+        gap: 10px;
+        /* Réduire l'espacement */
+        padding: 10px;
+        /* Ajouter du padding */
+    }
+
+    .carte-container {
         flex-direction: column;
+        gap: 20px;
+        /* Ajuster l'espacement */
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px;
+        /* Ajouter du padding */
+    }
+
+    .carte {
+        width: 100%;
+        /* Ajuster la largeur */
+    }
+
+    .Class {
+        width: 100%;
+        /* Ajuster la largeur */
+    }
+}
+
+@media (max-width: 668px) {
+    .card-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        /* Centrer les cartes */
+        gap: 10px;
+        /* Réduire l'espacement */
+        padding: 5px;
+        margin-top: 50px;
+        /* Ajouter du padding */
+    }
+
+    .carte-container {
+        flex-direction: column;
+        gap: 10px;
+        /* Ajuster l'espacement */
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px;
+        /* Ajouter du padding */
+    }
+
+    .carte {
+        width: 100%;
+        /* Ajuster la largeur */
+    }
+
+    .Class {
+        width: 100%;
+        /* Ajuster la largeur */
+    }
+}
+
+@media (max-width: 480px) {
+    .textheader {
+        font-size: 2rem;
+        /* Réduire la taille de la police */
+    }
+
+    .Homepage {
+        height: auto;
+        /* Ajuster la hauteur */
+    }
+
+    .textclass {
+        top: 10px;
+        /* Réduire l'espacement */
+    }
+
+    .card-container {
+        gap: 5px;
+        /* Réduire encore plus l'espacement */
+    }
+
+    .carte-container {
+        margin-left: 5vh;
+        margin-right: 5vh;
     }
 }
 </style>

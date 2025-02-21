@@ -10,15 +10,19 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import img1 from "@/assets/Turnofcity/turn1.jpg";
-import img2 from "@/assets/Turnofcity/turn2.jpg";
-import img3 from "@/assets/Turnofcity/turn3.jpg";
-import img4 from "@/assets/Turnofcity/turn4.jpg";
-import img5 from "@/assets/Turnofcity/turn5.jpg";
-import img6 from "@/assets/Turnofcity/turn6.jpg";
+import img1 from "@/assets/Turnofcity/speed1.png";
+import img2 from "@/assets/Turnofcity/speed2.png";
+import img3 from "@/assets/Turnofcity/speed3.png";
+import img4 from "@/assets/Turnofcity/speed4.png";
+import img5 from "@/assets/Turnofcity/turn1.jpg";
+import img6 from "@/assets/Turnofcity/turn2.jpg";
+import img7 from "@/assets/Turnofcity/turn3.jpg";
+import img8 from "@/assets/Turnofcity/turn4.jpg";
+import img9 from "@/assets/Turnofcity/turn5.jpg";
+import img10 from "@/assets/Turnofcity/turn6.jpg";
 
 
-const images = ref([img1, img2, img3, img4, img5, img6]);
+const images = ref([img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]);
 const currentIndex = ref(0);
 let interval = null;
 
@@ -56,7 +60,7 @@ onUnmounted(() => {
     background: #000;
     border-radius: 8px;
     position: relative;
-    border: 4px solid #108bdd;
+    border: 4px solid #d67d91;
 }
 
 .carousel-image {

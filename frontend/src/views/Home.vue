@@ -50,4 +50,13 @@ const cartes = [
   margin-right: 15vh;
   gap: 20px;
 }
+
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    margin-top: 10vh;
+  }
+}
 </style>

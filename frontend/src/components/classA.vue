@@ -1,8 +1,32 @@
+<template>
+  <div class="card">
+    <img :src="imageSrc" alt="Card image" class="card-image" loading="lazy">
+    <div class="card-details">
+      <p class="text-title">{{ className }}</p>
+    </div>
+    <button class="card-button">More info</button>
+  </div>
+</template>
+
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  className: String,
+  image: String,
+});
+
+const imageSrc = computed(() => {
+  return new URL(`../assets/${props.image}.png`, import.meta.url).href;
+});
+</script>
+
 <style scoped>
 .card {
-  width: 180px;
-  /* Assurez-vous que les cartes occupent toute la largeur disponible */
-  height: 150px;
+  width: 100%;
+  max-width: 180px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 20px;
   background: #f5f5f5;
   position: relative;
@@ -10,10 +34,9 @@
   border: 2px solid #54C3EA;
   transition: 0.5s ease-out;
   overflow: visible;
-  margin: 50px 50px;
-  /* Supprimez les marges ici */
+  margin: 10px;
+  /* Ajustez les marges ici */
 }
-
 
 .card-image {
   width: 100%;
@@ -24,18 +47,13 @@
 .card-details {
   color: rgb(0, 0, 0);
   position: absolute;
-  /* Placer les détails par-dessus l'image */
   bottom: 10px;
-  /* Ajuster la position verticale des détails */
   width: 100%;
   height: 100%;
   text-align: center;
   background: rgba(245, 245, 245, 0.5);
-  /* Fond semi-transparent pour mieux voir le texte */
   padding: 0.5em;
-  /* Ajouter un peu d'espace autour du texte */
   box-sizing: border-box;
-  /* Inclure le padding dans les dimensions de l'élément */
   border-radius: 20px;
   bottom: 0px;
 }
@@ -57,13 +75,11 @@
   transition: 0.3s ease-out;
 }
 
-/*Text*/
 .text-title {
   font-size: 1.5em;
   font-weight: bold;
 }
 
-/*Hover*/
 .card:hover {
   border-color: #d67d91;
   box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
@@ -74,27 +90,3 @@
   opacity: 1;
 }
 </style>
-
-<template>
-  <div class="card">
-    <img :src="imageSrc" alt="Card image" class="card-image" loading="lazy">
-    <div class="card-details">
-      <p class="text-title">{{ className }}</p>
-    </div>
-    <button class="card-button">More info</button>
-  </div>
-</template>
-
-<script setup>
-import { computed } from 'vue';
-
-
-const props = defineProps({
-  className: String,
-  image: String,
-});
-
-const imageSrc = computed(() => {
-  return new URL(`../assets/${props.image}.webp`, import.meta.url).href;
-});
-</script>

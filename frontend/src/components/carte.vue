@@ -88,17 +88,9 @@ const imageSrc = computed(() => {
   z-index: -1;
 }
 
-/* Responsiveness */
 @media (max-width: 768px) {
-  .card-container {
-    flex-direction: column;
-    margin-left: 5vh;
-    margin-right: 5vh;
-    margin-top: 10vh;
-  }
-
   .card {
-    width: 80%;
+    width: 250px;
     height: 250px;
     margin-bottom: 20px;
   }
