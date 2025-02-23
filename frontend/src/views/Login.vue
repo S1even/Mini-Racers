@@ -16,30 +16,27 @@ import axios from 'axios';
 import LoginCard from '@/components/logincard.vue';
 import Footer from '@/components/footer.vue';
 import router from '@/router';
+import { useAuthStore } from '../../stores/authStore';
 
 const email = ref('');
 const password = ref('');
 const errorMessage = ref('');
+const authStore = useAuthStore();
 
 const handleLogin = async (credentials) => {
   try {
-    console.log('Données envoyées au backend:', credentials); // Log pour vérifier les données
-
     const response = await axios.post('http://localhost:5500/api/auth/login', credentials);
 
-    console.log('Réponse du backend:', response.data); // Log pour vérifier la réponse du backend
-
-    alert('Connexion réussie !');
-    console.log(response.data);
-    router.push('/');
+    if (response.data.username) {
+      authStore.login(response.data.username);
+      router.push('/'); // Rediriger vers la page d'accueil
+    }
   } catch (error) {
-    console.error('Erreur lors de la connexion:', error); // Log pour vérifier l'erreur
     if (error.response) {
-      // Utiliser le message d'erreur renvoyé par le backend
       errorMessage.value = error.response.data.message || "Une erreur est survenue. Veuillez réessayer";
     }
   };
-}
+};
 </script>
 
 <style scoped>

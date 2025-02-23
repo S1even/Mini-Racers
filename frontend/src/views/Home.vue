@@ -16,6 +16,7 @@ import Download from '@/components/download.vue';
 import Navbar from '@/components/navbar.vue';
 import Footer from '@/components/footer.vue';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { ref } from 'vue';
 
 const cartes = [
   {

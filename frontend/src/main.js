@@ -4,6 +4,7 @@ import router from './router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { createPinia } from 'pinia';
 
 // Ajouter les icônes à la bibliothèque FontAwesome
 library.add(fas);
@@ -13,6 +14,7 @@ const app = createApp(App);
 
 // Enregistrer le composant FontAwesomeIcon globalement
 app.component('font-awesome-icon', FontAwesomeIcon);
+app.use(createPinia());
 
 // Utiliser le routeur
 app.use(router);

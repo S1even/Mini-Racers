@@ -8,8 +8,10 @@
     <div class="Homepage">
         <h1 class="textclass">LIST OF CARS</h1>
         <div class="card-container">
-            <Class v-for="(card, index) in cards" :className="card.className" :image="card.image" :key="index"
-                :class="'cards-' + index" />
+            <TransitionGroup name="fade" tag="div" class="card-wrapper">
+                <Class v-for="(card, index) in displayedCards" :className="card.className" :image="card.image"
+                    :key="index" :class="'cards-' + index" />
+            </TransitionGroup>
         </div>
         <p>The cars have been carefully selected by our expert, Steven. Each vehicle has been configured to ensure
             fairness in every class.</p>
@@ -33,6 +35,8 @@ import Class from '@/components/classA.vue';
 import Navbar from '@/components/navbar.vue';
 import carousel from '@/components/carousel.vue';
 import Footer from '@/components/footer.vue';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
 
 const cards = [
     {
@@ -73,6 +77,17 @@ const cartes = [
         image: 'mapmorgan',
     },
 ];
+
+const displayedCards = ref([]);
+
+onMounted(() => {
+    displayedCards.value = [];
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            displayedCards.value.push(card);
+        }, index * 400);
+    });
+});
 </script>
 
 <style scoped>
@@ -130,6 +145,10 @@ const cartes = [
     padding-top: 50px;
 }
 
+.card-wrapper {
+    display: contents;
+}
+
 .Mappage {
     background-color: #f8b05d;
     background-size: cover;
@@ -146,6 +165,17 @@ const cartes = [
     padding-bottom: 100px;
     position: relative;
     top: 20px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.8s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 /* Réactivité */

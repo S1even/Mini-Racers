@@ -10,9 +10,10 @@
                 <li><router-link to="/login">Login</router-link></li>
                 <li><router-link to="/register">Register</router-link></li>
                 <li><router-link to="/contents">Contents</router-link></li>
-                <li><router-link to="/contact">About</router-link></li>
+                <li><router-link to="/about">About</router-link></li>
             </ul>
-            <a href="#" class="action_btn" v-if="!isMenuOpen">Get started</a>
+            <a href="#" class="action_btn" v-if="!isMenuOpen">{{ username ? `Connected on ${username}` : "Disconnected"
+            }}</a>
             <div class="toggle_btn" @click="toggleMenu" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
                 <font-awesome-icon :icon="isMenuOpen ? ['fas', 'times'] : ['fas', 'bars']" :bounce="isHovered"
                     size="lg" />
@@ -23,7 +24,7 @@
             <li><router-link to="/login">Login</router-link></li>
             <li><router-link to="/register">Register</router-link></li>
             <li><router-link to="/contents">Contents</router-link></li>
-            <li><router-link to="/contact">About</router-link></li>
+            <li><router-link to="/about">About</router-link></li>
             <li><router-link to="#" class="action_btn">Get started</router-link></li>
         </div>
     </header>
@@ -31,12 +32,16 @@
 
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { RouterLink } from "vue-router";
+import { useAuthStore } from "../../stores/authStore";
 
 const isMenuOpen = ref(false);
 const isHovered = ref(false);
+const authStore = useAuthStore();
+
+const username = computed(() => authStore.username);
 
 const toggleMenu = () => {
     isMenuOpen.value = !isMenuOpen.value;

@@ -3,6 +3,8 @@ import Login from '../views/Login.vue';
 import Home from '@/views/Home.vue';
 import Register from '@/views/Register.vue';
 import Contents from '@/views/Contents.vue';
+import About from '@/views/About.vue';
+import NotFound from '@/views/NotFound.vue';
 
 const routes = [
   {
@@ -36,7 +38,19 @@ const routes = [
     meta: {
       title: 'Contents - Mini Racers'
     }
-  }
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: {
+      title: 'About - Mini Racers'
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound,
+  },
   // Autres routes ici
 ];
 
