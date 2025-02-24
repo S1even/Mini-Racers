@@ -6,45 +6,94 @@
                     <img src="@/assets/logonav.png" alt="Logo Nav" class="logo-nav" />
                 </router-link>
             </div>
-            <ul class="links" v-if="!isMenuOpen">
+            <ul class="links" v-if="!isMenuOpen || screenWidth > 992">
                 <li><router-link to="/login">Login</router-link></li>
                 <li><router-link to="/register">Register</router-link></li>
                 <li><router-link to="/contents">Contents</router-link></li>
                 <li><router-link to="/about">About</router-link></li>
             </ul>
-            <a href="#" class="action_btn" v-if="!isMenuOpen">{{ username ? `Connected on ${username}` : "Disconnected"
-            }}</a>
-            <div class="toggle_btn" @click="toggleMenu" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
-                <font-awesome-icon :icon="isMenuOpen ? ['fas', 'times'] : ['fas', 'bars']" :bounce="isHovered"
-                    size="lg" />
+            <div class="user_menu">
+                <a href="#" class="action_btn" @click="toggleUserMenu">{{
+                    username ? `Welcome
+                    ${username}` : "Disconnected"
+                    }}</a>
+                <div class="dropdown_user" :class="{ open: isUserMenuOpen }">
+                    <router-link to="/settings">⚙️ Settings</router-link>
+                    <a href="#" @click="handlelogout">🚪 Logout</a>
+                </div>
+                <div class="toggle_btn" @click="toggleMenu" @mouseenter="isHovered = true"
+                    @mouseleave="isHovered = false">
+                    <font-awesome-icon :icon="isMenuOpen ? ['fas', 'times'] : ['fas', 'bars']" :bounce="isHovered"
+                        size="lg" />
+                </div>
             </div>
         </div>
-
         <div class="dropdown_menu" :class="{ open: isMenuOpen }">
             <li><router-link to="/login">Login</router-link></li>
             <li><router-link to="/register">Register</router-link></li>
             <li><router-link to="/contents">Contents</router-link></li>
             <li><router-link to="/about">About</router-link></li>
-            <li><router-link to="#" class="action_btn">Get started</router-link></li>
+            <li><a href="#" class="action_btn" @click="toggleDropdownUserMenu">{{ username ? `${username}` :
+                "Disconnected" }}</a></li>
+            <div class="dropdown_user" :class="{ open: isDropdownUserMenuOpen }">
+                <router-link to="/settings">⚙️ Settings</router-link>
+                <a href="#" @click="handlelogout">🚪 Logout</a>
+            </div>
         </div>
     </header>
 </template>
 
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import { useAuthStore } from "../../stores/authStore";
+import { logout } from "../../stores/authService";
 
 const isMenuOpen = ref(false);
 const isHovered = ref(false);
 const authStore = useAuthStore();
+const isUserMenuOpen = ref(false);
+const isDropdownUserMenuOpen = ref(false);
 
 const username = computed(() => authStore.username);
+const screenWidth = ref(window.innerWidth);
+
+const updateScreenWidth = () => {
+    screenWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+    window.addEventListener("resize", updateScreenWidth);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("resize", updateScreenWidth);
+})
 
 const toggleMenu = () => {
-    isMenuOpen.value = !isMenuOpen.value;
+    if (screenWidth.value <= 992) {
+        isMenuOpen.value = !isMenuOpen.value;
+    }
+};
+
+const toggleUserMenu = () => {
+    isUserMenuOpen.value = !isUserMenuOpen.value;
+};
+
+const toggleDropdownUserMenu = () => {
+    isDropdownUserMenuOpen.value = !isDropdownUserMenuOpen.value;
+};
+
+const router = useRouter();
+const handlelogout = async () => {
+    try {
+        await logout(authStore, router);
+        console.log('Déconnexion réussie');
+    } catch (error) {
+        console.error('Erreur lors de la déconnexion :', error);
+    }
 };
 </script>
 
@@ -156,6 +205,34 @@ header {
     height: 70px;
 }
 
+.dropdown_user {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    width: 200px;
+    background: rgba(255, 255, 255, 0.274);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.dropdown_user.open {
+    display: block;
+}
+
+.dropdown_user a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-align: center;
+}
+
+.dropdown_user a:hover {
+    background: #d67d91;
+}
+
 /* Responsive Navbar */
 @media (max-width: 992px) {
 
@@ -177,6 +254,16 @@ header {
     .dropdown_menu {
         left: 2rem;
         width: unset;
+    }
+}
+
+@media (min-width: 992px) {
+    .dropdown_menu {
+        display: none !important;
+    }
+
+    .navbar .links {
+        display: flex !important;
     }
 }
 </style>

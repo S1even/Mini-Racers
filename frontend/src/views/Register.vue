@@ -2,7 +2,8 @@
   <div class="home-page">
     <Navbar />
     <Register :username="username" :email="email" :password="password" :confirmpassword="confirmpassword"
-      :errorMessage="errorMessage" @update:email="email = $event" @update:password="password = $event"
+      :errorMessage="errorMessage" @update:username="username = $event" @update:email="email = $event"
+      @update:password="password = $event" @update:confirmpassword="confirmpassword = $event"
       @submit="handleRegister" />
   </div>
   <div>
@@ -13,34 +14,39 @@
 <script setup>
 import { ref } from 'vue';
 import Navbar from '@/components/navbar.vue';
-import axios from 'axios';
 import Register from '@/components/registcard.vue';
-import router from '@/router';
-import Footer from '@/components/footer.vue'
+import Footer from '@/components/footer.vue';
+import { register } from '../../stores/authService';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '../../stores/authStore';
 
 const username = ref('');
 const email = ref('');
 const password = ref('');
 const confirmpassword = ref('');
 const errorMessage = ref('');
+const router = useRouter();
+const authStore = useAuthStore();
 
-const handleRegister = async (credentials) => {
+const handleRegister = async () => {
+  const credentials = {
+    username: username.value,
+    email: email.value,
+    password: password.value,
+    confirmpassword: confirmpassword.value
+  };
+
+  console.log('Données envoyées au backend:', credentials);
+
   try {
-    console.log('Données envoyées au backend:', credentials); // Log pour vérifier les données
+    await register(credentials, authStore, router);
+    console.log('Register Sucessfull');
 
-    const response = await axios.post('http://localhost:5500/api/auth/register', credentials);
-
-    console.log('Réponse du backend:', response.data); // Log pour vérifier la réponse du backend
-
-    alert('Register completed !');
-    console.log(response.data);
-    router.push('/register');
+    alert('Register completed!');
+    router.push('/login');
   } catch (error) {
-    console.error('Error during registration', error); // Log pour vérifier l'erreur
-    if (error.response) {
-      // Utiliser le message d'erreur renvoyé par le backend
-      errorMessage.value = error.response.data.message || "An error has occurred. Please try again";
-    }
+    errorMessage.value = error.message;
+    console.error('Error during registration:', error);
   }
 };
 </script>

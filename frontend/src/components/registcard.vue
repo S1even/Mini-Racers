@@ -27,13 +27,13 @@
                 Submit
             </button>
         </form>
-        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+        <p v-if="localErrorMessage" class="error-message">{{ localErrorMessage }}</p>
         <p>Already have an account? <a href="/login" class="a2">Login here</a></p>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 const props = defineProps({
     username: String,
@@ -43,7 +43,7 @@ const props = defineProps({
     errorMessage: String
 });
 
-const emits = defineEmits(['submit']);
+const emits = defineEmits(['update:username', 'update:email', 'update:password', 'update:confirmpassword', 'submit']);
 
 const localUsername = ref(props.username);
 const localEmail = ref(props.email);
@@ -51,14 +51,35 @@ const localPassword = ref(props.password);
 const localconfirmpassword = ref(props.confirmpassword);
 const localErrorMessage = ref(props.errorMessage);
 
+watchEffect(() => {
+    localEmail.value = props.email;
+    localUsername.value = props.username;
+    localPassword.value = props.password;
+    localconfirmpassword.value = props.confirmpassword;
+    localErrorMessage.value = props.errorMessage;
+});
+
 const handleSubmit = () => {
-    if (localPassword.value !== localconfirmpassword.value) {
-        localErrorMessage.value = 'Passwords do not match';
-        return;
-    }
-    emits('submit', { username: localUsername.value, email: localEmail.value, password: localPassword.value, confirmpassword: localconfirmpassword.value });
+    console.log('Soumission du formulaire avec les valeurs :', {
+        username: localUsername.value,
+        email: localEmail.value,
+        password: localPassword.value,
+        confirmpassword: localconfirmpassword.value
+    });
+
+    emits('update:username', localUsername.value);
+    emits('update:email', localEmail.value);
+    emits('update:password', localPassword.value);
+    emits('update:confirmpassword', localconfirmpassword.value);
+    emits('submit', {
+        username: localUsername.value,
+        email: localEmail.value,
+        password: localPassword.value,
+        confirmpassword: localconfirmpassword.value
+    });
 };
 </script>
+
 
 <style scoped>
 /* Styles existants */

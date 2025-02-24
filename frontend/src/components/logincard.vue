@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 const props = defineProps({
     email: String,
@@ -33,13 +33,24 @@ const props = defineProps({
     errorMessage: String
 });
 
-const emits = defineEmits(['submit']);
+const emits = defineEmits(['update:email', 'update:password', 'submit']);
 
 const localEmail = ref(props.email);
 const localPassword = ref(props.password);
 
+watchEffect(() => {
+    localEmail.value = props.email;
+    localPassword.value = props.password;
+});
+
 const handleSubmit = () => {
-    emits('submit', { email: localEmail.value, password: localPassword.value });
+    console.log('Soumission du formulaire avec les valeurs :', {
+        email: localEmail.value,
+        password: localPassword.value
+    });
+    emits('update:email', localEmail.value);
+    emits('update:password', localPassword.value);
+    emits('submit');
 };
 </script>
 
