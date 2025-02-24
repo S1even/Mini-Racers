@@ -1,3 +1,31 @@
+<template>
+  <button v-if="isAuthenticated" class="shadow__btn" @click="downloadFile">
+    Download
+  </button>
+  <button v-else class="shadow__btn" @click="redirectToLogin">
+    Login to Download
+  </button>
+</template>
+
+<script setup>
+import { useAuthStore } from '../../stores/authStore';
+import { useRouter } from "vue-router";
+import { computed } from 'vue';
+
+const authStore = useAuthStore();
+const router = useRouter();
+
+const isAuthenticated = computed(() => !!authStore.token);
+
+const downloadFile = () => {
+  // Remplace avec l'URL de ton fichier
+  window.location.href = "https://drive.google.com/file/d/1fzopuzASCf8w8fmP3QZxRFM0wFRSqxVA/view?usp=sharing";
+};
+
+const redirectToLogin = () => {
+  router.push("/login");
+};
+</script>
 <style scoped>
 .shadow__btn {
   padding: 10px 20px;
@@ -49,9 +77,3 @@
   }
 }
 </style>
-
-<template>
-  <button class="shadow__btn">
-    Download
-  </button>
-</template>

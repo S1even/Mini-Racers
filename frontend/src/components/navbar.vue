@@ -7,8 +7,8 @@
                 </router-link>
             </div>
             <ul class="links" v-if="!isMenuOpen || screenWidth > 992">
-                <li><router-link to="/login">Login</router-link></li>
-                <li><router-link to="/register">Register</router-link></li>
+                <li v-if="!username"><router-link to="/login">Login</router-link></li>
+                <li v-if="!username"><router-link to="/register">Register</router-link></li>
                 <li><router-link to="/contents">Contents</router-link></li>
                 <li><router-link to="/about">About</router-link></li>
             </ul>
@@ -16,7 +16,7 @@
                 <a href="#" class="action_btn" @click="toggleUserMenu">{{
                     username ? `Welcome
                     ${username}` : "Disconnected"
-                    }}</a>
+                }}</a>
                 <div class="dropdown_user" :class="{ open: isUserMenuOpen }">
                     <router-link to="/settings">⚙️ Settings</router-link>
                     <a href="#" @click="handlelogout">🚪 Logout</a>
@@ -29,8 +29,8 @@
             </div>
         </div>
         <div class="dropdown_menu" :class="{ open: isMenuOpen }">
-            <li><router-link to="/login">Login</router-link></li>
-            <li><router-link to="/register">Register</router-link></li>
+            <li v-if="!username"><router-link to="/login">Login</router-link></li>
+            <li v-if="!username"><router-link to="/register">Register</router-link></li>
             <li><router-link to="/contents">Contents</router-link></li>
             <li><router-link to="/about">About</router-link></li>
             <li><a href="#" class="action_btn" @click="toggleDropdownUserMenu">{{ username ? `${username}` :

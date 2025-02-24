@@ -49,8 +49,8 @@ onUnmounted(() => {
 
 <style scoped>
 .carousel {
-    width: 600px;
-    height: 300px;
+    width: 500px;
+    height: 275px;
     overflow: hidden;
     display: flex;
     top: -400px;
@@ -58,17 +58,17 @@ onUnmounted(() => {
     justify-content: center;
     align-items: center;
     background: #000;
-    border-radius: 8px;
+    border-radius: 7px;
     position: relative;
-    border: 4px solid #d67d91;
 }
 
 .carousel-image {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 7px;
 }
+
 
 /* INDICATEURS */
 .indicators {

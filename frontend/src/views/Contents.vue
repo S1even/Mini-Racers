@@ -18,11 +18,17 @@
     </div>
     <div class="Mappage">
         <h1 class="textclass">LIST OF MAPS</h1>
+        <h2 class="text-carousel">Feel the Speed and the Thrill of Racing!</h2>
+        <p class="resume-carousel">Dive into the world of racing with incredible maps that will make you experience
+            intense thrills at every turn. Challenge the road, floor the accelerator, and enjoy the non-stop fun in a
+            game where every second counts!</p>
         <div class="carte-container">
             <Carte v-for="(carte, index) in cartes" :title="carte.carteName" :description="carte.carteDescription"
                 :image="carte.image" :key="index" :class="'cartes-' + index" />
         </div>
-        <carousel />
+        <div>
+            <carousel class="carousel-container" />
+        </div>
     </div>
     <div>
         <Footer />
@@ -153,18 +159,70 @@ onMounted(() => {
     background-color: #f8b05d;
     background-size: cover;
     background-position: center;
-    height: 60vh;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
 }
 
 .carte-container {
     display: flex;
-    flex-direction: column;
-    gap: 50px;
-    /* Ajustez cette valeur pour contrôler l'espacement vertical */
-    margin-left: 30px;
-    padding-bottom: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    /* Ajuster l'espacement */
+    max-width: 80%;
+    /* Largeur maximale pour s'adapter à l'écran */
+    margin: 90px auto -150px;
+    padding-top: 20px;
+    /* Ajouté pour éviter le débordement */
+}
+
+.carousel-container {
     position: relative;
-    top: 20px;
+    margin: auto;
+    left: 25%;
+    /* Largeur maximale pour s'adapter à l'écran */
+}
+
+.carousel-text-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+    /* Ajoute un espacement en haut */
+}
+
+.text-carousel {
+    position: relative;
+    margin: 80px auto 5px;
+    color: #ffffff;
+    text-shadow:
+        0 0 5px #f6ac57,
+        0 0 10px #f59eb1,
+        0 0 20px #ee93bf,
+        0 0 40px #9c61bd;
+    font-size: 35px;
+    max-width: 80%;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.resume-carousel {
+    margin: 45px auto 20px;
+    /* Réduire l'espace en haut */
+    text-align: center;
+    /* Assure que le texte est aligné à gauche */
+    padding: 0 50px;
+    word-wrap: break-word;
+    max-width: 35%;
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-size: 25px;
+    color: #fff;
+    margin-left: 20px;
+    /* Aligne le texte en dessous du texte-carousel */
 }
 
 .fade-enter-active,
@@ -179,97 +237,124 @@ onMounted(() => {
 }
 
 /* Réactivité */
-@media (max-width: 768px) {
+@media (max-width: 775px) {
     .card-container {
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        /* Centrer les cartes */
         gap: 10px;
-        /* Réduire l'espacement */
-        padding: 10px;
-        /* Ajouter du padding */
-    }
-
-    .carte-container {
-        flex-direction: column;
-        gap: 20px;
-        /* Ajuster l'espacement */
-        margin-left: 0;
-        margin-right: 0;
-        padding: 10px;
-        /* Ajouter du padding */
-    }
-
-    .carte {
-        width: 100%;
-        /* Ajuster la largeur */
-    }
-
-    .Class {
-        width: 100%;
-        /* Ajuster la largeur */
-    }
-}
-
-@media (max-width: 668px) {
-    .card-container {
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        /* Centrer les cartes */
-        gap: 10px;
-        /* Réduire l'espacement */
         padding: 5px;
         margin-top: 50px;
-        /* Ajouter du padding */
     }
 
     .carte-container {
         flex-direction: column;
-        gap: 10px;
-        /* Ajuster l'espacement */
-        margin-left: 0;
-        margin-right: 0;
+        align-items: center;
+        gap: 20px;
+        margin: 55px;
         padding: 10px;
-        /* Ajouter du padding */
     }
 
     .carte {
         width: 100%;
-        /* Ajuster la largeur */
     }
 
     .Class {
         width: 100%;
-        /* Ajuster la largeur */
+    }
+
+    .carousel-container {
+        left: 0px;
+        margin-top: 450px;
+    }
+
+    .text-carousel,
+    .resume-carousel {
+        margin: 10px auto;
+        width: 90%;
+    }
+
+    .Homepage {
+        height: 70vh;
+    }
+
+    .Mappage {
+        height: 155vh;
     }
 }
 
 @media (max-width: 480px) {
     .textheader {
         font-size: 2rem;
-        /* Réduire la taille de la police */
     }
 
     .Homepage {
         height: auto;
-        /* Ajuster la hauteur */
     }
 
     .textclass {
         top: 10px;
-        /* Réduire l'espacement */
     }
 
     .card-container {
         gap: 5px;
-        /* Réduire encore plus l'espacement */
     }
 
     .carte-container {
         margin-left: 5vh;
         margin-right: 5vh;
+    }
+
+    .carousel-container,
+    .text-carousel,
+    .resume-carousel {
+        margin: 10px 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 430px) {
+    .textheader {
+        font-size: 2rem;
+    }
+
+    .Homepage {
+        height: auto;
+    }
+
+    .textclass {
+        top: 10px;
+    }
+
+    .card-container {
+        gap: 5px;
+    }
+
+    .carte-container {
+        margin-left: 5vh;
+        margin-right: 5vh;
+    }
+
+    .carousel-container {
+        max-width: 98%;
+        max-height: 235px;
+        margin-top: 450px;
+    }
+
+    .text-carousel,
+    .resume-carousel {
+        margin: 10px 80px;
+        width: 100%;
+    }
+
+    .Mappage {
+        height: 200vh;
+    }
+}
+
+@media (max-width:390px) {
+    .Mappage {
+        height: 225vh;
     }
 }
 </style>

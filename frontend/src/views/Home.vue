@@ -5,7 +5,8 @@
       <Carte v-for="(carte, index) in cartes" :title="carte.carteName" :description="carte.carteDescription"
         :image="carte.image" :key="index" :class="'cartes-' + index" />
     </div>
-    <Download />
+    <Download :isAuthenticated="isLoggedIn"
+      fileUrl="https://drive.google.com/file/d/1fzopuzASCf8w8fmP3QZxRFM0wFRSqxVA/view?usp=sharing" />
   </div>
   <Footer />
 </template>
@@ -17,6 +18,8 @@ import Navbar from '@/components/navbar.vue';
 import Footer from '@/components/footer.vue';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { ref } from 'vue';
+
+const isLoggedIn = ref(localStorage.getItem("userToken") !== null);
 
 const cartes = [
   {
