@@ -52,19 +52,19 @@ const isLastCardMounted = ref(false);
 onMounted(() => {
     setTimeout(() => {
         isFirstTextMounted.value = true;
-    }, 250);
+    }, 100);
 
     setTimeout(() => {
         isFirstCardsMounted.value = true;
-    }, 1250);
+    }, 600);
 
     setTimeout(() => {
         isSecondTextMounted.value = true;
-    }, 2250);
+    }, 1000);
 
     setTimeout(() => {
         isLastCardMounted.value = true;
-    }, 3250);
+    }, 1400);
 });
 </script>
 

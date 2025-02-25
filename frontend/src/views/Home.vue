@@ -37,7 +37,7 @@ const cartes = [
 onMounted(() => {
   setTimeout(() => {
     isMounted.value = true;
-  }, 250);
+  }, 150);
 });
 </script>
 

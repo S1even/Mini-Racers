@@ -29,7 +29,7 @@ const isMounted = ref(false);
 onMounted(() => {
   setTimeout(() => {
     isMounted.value = true;
-  }, 200);
+  }, 150);
 });
 
 const onSubmit = async () => {
