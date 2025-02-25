@@ -2,17 +2,14 @@
     <header>
       <div class="navbar">
         <div class="logo">
-          <router-link to="/">
-            <img src="@/assets/logonav.png" alt="Logo Nav" class="logo-nav" />
-          </router-link>
         </div>
         <ul class="links" v-if="!isMenuOpen">
-            <li><router-link to="/login">Login</router-link></li>
+            <li><router-link to="/">Home</router-link></li>
             <li><router-link to="/register">Register</router-link></li>
             <li><router-link to="/content">Contents</router-link></li>
-            <li><router-link to="/contact">About</router-link></li>
+            <li><router-link to="/about">About</router-link></li>
         </ul>
-        <a href="#" class="action_btn" v-if="!isMenuOpen">Get started</a>
+        <router-link to="/login" href="#" class="action_btn" v-if="!isMenuOpen">Login</router-link>
         <div 
         class="toggle_btn"
         @click="toggleMenu"
@@ -80,8 +77,7 @@ header {
 .navbar {
     width: 100%;
     height: 60px;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -115,6 +111,8 @@ header {
     font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
+    justify-content: space-between;
+
 }
 
 .action_btn:hover {
