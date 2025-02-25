@@ -3,7 +3,7 @@
     <Navbar />
     <div class="card-container">
       <Carte v-for="(carte, index) in cartes" :title="carte.carteName" :description="carte.carteDescription"
-        :image="carte.image" :key="index" :class="'cartes-' + index" />
+        :image="carte.image" :key="index" :class="'cartes-' + index + ' fade-in' + (isMounted ? ' show' : '')" />
     </div>
     <Download :isAuthenticated="isLoggedIn"
       fileUrl="https://drive.google.com/file/d/1fzopuzASCf8w8fmP3QZxRFM0wFRSqxVA/view?usp=sharing" />
@@ -12,14 +12,14 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import Carte from '@/components/carte.vue';
 import Download from '@/components/download.vue';
 import Navbar from '@/components/navbar.vue';
 import Footer from '@/components/footer.vue';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { ref } from 'vue';
 
 const isLoggedIn = ref(localStorage.getItem("userToken") !== null);
+const isMounted = ref(false);
 
 const cartes = [
   {
@@ -32,7 +32,13 @@ const cartes = [
     carteDescription: "A fun track designed by Morgan, featuring a whirlwind of unexpected turns and thrilling surprises. This circuit blends adrenaline and excitement at every moment, offering a wild ride that will delight thrill-seekers and lovers of the unexpected. Get ready for a crazy and exhilarating challenge !",
     image: 'mapmorgan',
   },
-]
+];
+
+onMounted(() => {
+  setTimeout(() => {
+    isMounted.value = true;
+  }, 250);
+});
 </script>
 
 <style scoped>
@@ -62,5 +68,15 @@ const cartes = [
     margin-right: 5vh;
     margin-top: 10vh;
   }
+}
+
+/* Animation d'apparition en fondu */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
 }
 </style>
