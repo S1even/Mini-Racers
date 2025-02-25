@@ -3,8 +3,8 @@
     <Navbar />
     <Register :username="username" :email="email" :password="password" :confirmpassword="confirmpassword"
       :errorMessage="errorMessage" @update:username="username = $event" @update:email="email = $event"
-      @update:password="password = $event" @update:confirmpassword="confirmpassword = $event"
-      @submit="handleRegister" />
+      @update:password="password = $event" @update:confirmpassword="confirmpassword = $event" @submit="handleRegister"
+      :class="{ 'fade-in': true, 'show': isMounted }" />
   </div>
   <div>
     <Footer />
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Navbar from '@/components/navbar.vue';
 import Register from '@/components/registcard.vue';
 import Footer from '@/components/footer.vue';
@@ -27,6 +27,13 @@ const confirmpassword = ref('');
 const errorMessage = ref('');
 const router = useRouter();
 const authStore = useAuthStore();
+const isMounted = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isMounted.value = true;
+  }, 200);
+});
 
 const handleRegister = async () => {
   const credentials = {
@@ -58,5 +65,14 @@ const handleRegister = async () => {
   background-size: cover;
   background-position: center;
   background-color: #ffff;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
 }
 </style>

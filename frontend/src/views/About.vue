@@ -2,7 +2,6 @@
     <div class="page-container">
         <Navbar class="transparent-navbar" />
         <div class="homepage">
-            <!-- Premier texte -->
             <div class="text-container">
                 <p :class="{ 'card-text': true, 'fade-in': true, 'show': isFirstTextMounted }">
                     Here is the team of developers who worked on this project, which meant a lot to all of us. When we
@@ -10,23 +9,17 @@
                     everyone who downloads the game and has fun with it!
                 </p>
             </div>
-
-            <!-- Première ligne de cartes -->
             <div ref="cardsContainer" class="cards-container">
                 <pub v-for="(person, index) in people.slice(0, 4)" :key="index" :name="person.name" :role="person.role"
                     :photo="person.photo" :github="person.github" :linkedin="person.linkedin"
                     :class="{ 'fade-in': true, 'show': isFirstCardsMounted }" />
             </div>
-
-            <!-- Deuxième texte -->
             <div class="last-card-container">
                 <p :class="{ 'last-card-text': true, 'fade-in': true, 'show': isSecondTextMounted }">
                     Un grand merci à Yannis pour avoir contribué au projet en nous concoctant une musique pour nos
                     circuits.
                 </p>
             </div>
-
-            <!-- Dernière carte -->
             <div class="last-card-container">
                 <pub :name="people[4].name" :role="people[4].role" :photo="people[4].photo" :github="people[4].github"
                     :linkedin="people[4].linkedin" :class="{ 'fade-in': true, 'show': isLastCardMounted }" />
@@ -51,26 +44,26 @@ const people = [
 ];
 
 // Variables pour contrôler l'apparition des éléments
-const isFirstTextMounted = ref(false); // Premier texte
-const isFirstCardsMounted = ref(false); // Première ligne de cartes
-const isSecondTextMounted = ref(false); // Deuxième texte
-const isLastCardMounted = ref(false); // Dernière carte
+const isFirstTextMounted = ref(false);
+const isFirstCardsMounted = ref(false);
+const isSecondTextMounted = ref(false);
+const isLastCardMounted = ref(false);
 
 onMounted(() => {
     setTimeout(() => {
-        isFirstTextMounted.value = true; // Premier texte après 250ms
+        isFirstTextMounted.value = true;
     }, 250);
 
     setTimeout(() => {
-        isFirstCardsMounted.value = true; // Première ligne de cartes après 1250ms (1 seconde après le premier texte)
+        isFirstCardsMounted.value = true;
     }, 1250);
 
     setTimeout(() => {
-        isSecondTextMounted.value = true; // Deuxième texte après 2250ms (2 secondes après le premier texte)
+        isSecondTextMounted.value = true;
     }, 2250);
 
     setTimeout(() => {
-        isLastCardMounted.value = true; // Dernière carte après 3250ms (3 secondes après le premier texte)
+        isLastCardMounted.value = true;
     }, 3250);
 });
 </script>
@@ -171,7 +164,6 @@ onMounted(() => {
 
     .cards-container {
         flex-direction: column;
-        /* Les cartes s'affichent en une seule colonne */
         gap: 10px;
     }
 

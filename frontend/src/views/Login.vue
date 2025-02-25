@@ -2,7 +2,7 @@
   <div class="home-page">
     <Navbar />
     <LoginCard :email="email" :password="password" :errorMessage="errorMessage" @update:email="email = $event"
-      @update:password="password = $event" @submit="onSubmit" />
+      @update:password="password = $event" @submit="onSubmit" :class="{ 'fade-in': true, 'show': isMounted }" />
   </div>
   <div>
     <Footer />
@@ -10,11 +10,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Navbar from '@/components/navbar.vue';
 import LoginCard from '@/components/logincard.vue';
 import Footer from '@/components/footer.vue';
-import { login } from '../../stores/authService';// Importez la méthode login du service d'authentification
+import { login } from '../../stores/authService';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/authStore';
 
@@ -23,6 +23,14 @@ const password = ref('');
 const errorMessage = ref('');
 const authStore = useAuthStore();
 const router = useRouter();
+const isMounted = ref(false);
+
+
+onMounted(() => {
+  setTimeout(() => {
+    isMounted.value = true;
+  }, 200);
+});
 
 const onSubmit = async () => {
   const credentials = {
@@ -33,7 +41,7 @@ const onSubmit = async () => {
   console.log('Tentative de connexion avec les credentials :', credentials);
 
   try {
-    await login(credentials, authStore, router); // Passez authStore et router comme arguments
+    await login(credentials, authStore, router);
     console.log('Connexion réussie');
   } catch (error) {
     errorMessage.value = error.message;
@@ -49,5 +57,15 @@ const onSubmit = async () => {
   background-size: cover;
   background-position: center;
   background-color: #ffff;
+}
+
+/* Animation d'apparition en fondu */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
 }
 </style>
