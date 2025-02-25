@@ -18,10 +18,7 @@
     </div>
     <div class="Mappage">
         <h1 class="textclass">LIST OF MAPS</h1>
-        <h2 class="text-carousel">Feel the Speed and the Thrill of Racing!</h2>
-        <p class="resume-carousel">Dive into the world of racing with incredible maps that will make you experience
-            intense thrills at every turn. Challenge the road, floor the accelerator, and enjoy the non-stop fun in a
-            game where every second counts!</p>
+        <textcarousel class="text-container" />
         <div class="carte-container">
             <Carte v-for="(carte, index) in cartes" :title="carte.carteName" :description="carte.carteDescription"
                 :image="carte.image" :key="index" :class="'cartes-' + index" />
@@ -43,6 +40,7 @@ import carousel from '@/components/carousel.vue';
 import Footer from '@/components/footer.vue';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
+import textcarousel from '@/components/textcarousel.vue';
 
 const cards = [
     {
@@ -168,12 +166,12 @@ onMounted(() => {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 25px;
+    gap: 250px;
     /* Ajuster l'espacement */
     max-width: 80%;
     /* Largeur maximale pour s'adapter à l'écran */
-    margin: 90px auto -150px;
-    padding-top: 20px;
+    margin: 90px auto -210px;
+    padding-top: 35px;
     /* Ajouté pour éviter le débordement */
 }
 
@@ -184,45 +182,12 @@ onMounted(() => {
     /* Largeur maximale pour s'adapter à l'écran */
 }
 
-.carousel-text-container {
+.text-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 20px;
-    /* Ajoute un espacement en haut */
-}
-
-.text-carousel {
-    position: relative;
-    margin: 80px auto 5px;
-    color: #ffffff;
-    text-shadow:
-        0 0 5px #f6ac57,
-        0 0 10px #f59eb1,
-        0 0 20px #ee93bf,
-        0 0 40px #9c61bd;
-    font-size: 35px;
-    max-width: 80%;
-    text-align: left;
-    margin-left: 10px;
-}
-
-.resume-carousel {
-    margin: 45px auto 20px;
-    /* Réduire l'espace en haut */
-    text-align: center;
-    /* Assure que le texte est aligné à gauche */
-    padding: 0 50px;
-    word-wrap: break-word;
-    max-width: 35%;
-    white-space: normal;
-    overflow-wrap: break-word;
-    font-size: 25px;
-    color: #fff;
-    margin-left: 20px;
-    /* Aligne le texte en dessous du texte-carousel */
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 60px;
+    padding-top: 60px;
 }
 
 .fade-enter-active,
@@ -237,6 +202,28 @@ onMounted(() => {
 }
 
 /* Réactivité */
+@media (max-width: 1079px) {
+    .carousel-container {
+        margin-top: 750px;
+        /* Ajuste la marge supérieure pour s'assurer qu'il se place bien en dessous des cartes */
+        left: 0;
+        right: 0;
+    }
+
+    .Mappage {
+        height: 130vh;
+    }
+
+    .carte-container {
+        gap: 50px;
+    }
+
+    .text-container {
+        align-items: center;
+    }
+}
+
+
 @media (max-width: 775px) {
     .card-container {
         flex-wrap: wrap;
@@ -266,12 +253,6 @@ onMounted(() => {
     .carousel-container {
         left: 0px;
         margin-top: 450px;
-    }
-
-    .text-carousel,
-    .resume-carousel {
-        margin: 10px auto;
-        width: 90%;
     }
 
     .Homepage {
@@ -305,9 +286,7 @@ onMounted(() => {
         margin-right: 5vh;
     }
 
-    .carousel-container,
-    .text-carousel,
-    .resume-carousel {
+    .carousel-container {
         margin: 10px 0;
         width: 100%;
     }
@@ -341,12 +320,6 @@ onMounted(() => {
         margin-top: 450px;
     }
 
-    .text-carousel,
-    .resume-carousel {
-        margin: 10px 80px;
-        width: 100%;
-    }
-
     .Mappage {
         height: 200vh;
     }
@@ -355,6 +328,18 @@ onMounted(() => {
 @media (max-width:390px) {
     .Mappage {
         height: 225vh;
+    }
+}
+
+@media (max-width:829px) {
+    .Mappage {
+        height: 150vh;
+    }
+}
+
+@media (max-width:648px) {
+    .Mappage {
+        height: 160vh;
     }
 }
 </style>
