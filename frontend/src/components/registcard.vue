@@ -1,6 +1,6 @@
 <template>
     <div class="login-box">
-        <p>Register</p>
+        <p>Sign-up</p>
         <form @submit.prevent="handleSubmit">
             <div class="user-box">
                 <input v-model="localUsername" required name="username" type="text">
@@ -28,7 +28,7 @@
             </button>
         </form>
         <p v-if="localErrorMessage" class="error-message">{{ localErrorMessage }}</p>
-        <p>Already have an account? <a href="/login" class="a2">Login here</a></p>
+        <p>Already have an account? <a href="/login" class="a2">Sign-in!</a></p>
     </div>
 </template>
 

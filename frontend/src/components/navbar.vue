@@ -13,19 +13,17 @@
                 <li><router-link to="/about">About</router-link></li>
             </ul>
             <div class="user_menu">
-                <a href="#" class="action_btn" @click="toggleUserMenu">{{
-                    username ? `Welcome
-                    ${username}` : "Disconnected"
-                }}</a>
-                <div class="dropdown_user" :class="{ open: isUserMenuOpen }">
+                <a href="#" class="action_btn" @click="toggleUserMenu">
+                    {{ isAuthenticated ? `Welcome ${username}` : "Disconnected" }}
+                </a>
+                <div class="dropdown_user" :class="{ open: isUserMenuOpen }" v-if="isAuthenticated">
                     <router-link to="/settings">⚙️ Settings</router-link>
                     <a href="#" @click="handlelogout">🚪 Logout</a>
                 </div>
-                <div class="toggle_btn" @click="toggleMenu" @mouseenter="isHovered = true"
-                    @mouseleave="isHovered = false">
-                    <font-awesome-icon :icon="isMenuOpen ? ['fas', 'times'] : ['fas', 'bars']" :bounce="isHovered"
-                        size="lg" />
-                </div>
+            </div>
+            <div class="toggle_btn" @click="toggleMenu" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
+                <font-awesome-icon :icon="isMenuOpen ? ['fas', 'times'] : ['fas', 'bars']" :bounce="isHovered"
+                    size="lg" />
             </div>
         </div>
         <div class="dropdown_menu" :class="{ open: isMenuOpen }">
@@ -35,13 +33,14 @@
             <li><router-link to="/about">About</router-link></li>
             <li><a href="#" class="action_btn" @click="toggleDropdownUserMenu">{{ username ? `${username}` :
                 "Disconnected" }}</a></li>
-            <div class="dropdown_user" :class="{ open: isDropdownUserMenuOpen }">
+            <div class="dropdown_user" :class="{ open: isDropdownUserMenuOpen }" v-if="isAuthenticated">
                 <router-link to="/settings">⚙️ Settings</router-link>
                 <a href="#" @click="handlelogout">🚪 Logout</a>
             </div>
         </div>
     </header>
 </template>
+
 
 
 <script setup>
@@ -70,7 +69,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     window.removeEventListener("resize", updateScreenWidth);
-})
+});
 
 const toggleMenu = () => {
     if (screenWidth.value <= 992) {
@@ -79,14 +78,23 @@ const toggleMenu = () => {
 };
 
 const toggleUserMenu = () => {
-    isUserMenuOpen.value = !isUserMenuOpen.value;
+    if (authStore.token) {
+        isUserMenuOpen.value = !isUserMenuOpen.value;
+    } else {
+        redirectToRegister();
+    }
 };
 
 const toggleDropdownUserMenu = () => {
-    isDropdownUserMenuOpen.value = !isDropdownUserMenuOpen.value;
+    if (authStore.token) {
+        isDropdownUserMenuOpen.value = !isDropdownUserMenuOpen.value;
+    } else {
+        redirectToRegister();
+    }
 };
 
 const router = useRouter();
+
 const handlelogout = async () => {
     try {
         await logout(authStore, router);
@@ -95,7 +103,14 @@ const handlelogout = async () => {
         console.error('Erreur lors de la déconnexion :', error);
     }
 };
+
+const redirectToRegister = () => {
+    router.push("/login");
+};
+
+const isAuthenticated = computed(() => !!authStore.token);
 </script>
+
 
 <style scoped>
 li {
@@ -116,7 +131,6 @@ header {
     position: relative;
     padding: 0 2rem;
     background: linear-gradient(90deg, rgba(214, 125, 145, 0.5), rgba(114, 150, 250, 0.5), rgba(214, 125, 145, 0.5));
-
 }
 
 .navbar {
@@ -205,11 +219,15 @@ header {
     height: 70px;
 }
 
+.user_menu {
+    position: relative;
+}
+
 .dropdown_user {
     display: none;
     position: absolute;
-    right: 2rem;
-    top: 60px;
+    right: -1rem;
+    top: 39.9px;
     width: 200px;
     background: rgba(255, 255, 255, 0.274);
     border-radius: 10px;
@@ -248,16 +266,37 @@ header {
     .dropdown_menu {
         display: block;
     }
+
+    .user_menu {
+        position: relative;
+    }
+
+    .dropdown_user {
+        right: 5.5rem;
+        top: 125px;
+    }
 }
 
 @media (max-width: 576px) {
+    .user_menu {
+        position: relative;
+    }
+
     .dropdown_menu {
         left: 2rem;
-        width: unset;
+
+    }
+
+    .dropdown_user {
+        right: 3rem;
     }
 }
 
 @media (min-width: 992px) {
+    .user_menu {
+        position: relative;
+    }
+
     .dropdown_menu {
         display: none !important;
     }
