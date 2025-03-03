@@ -3,19 +3,19 @@
         <p>Modify Profile</p>
         <form @submit.prevent="handleSubmit">
             <div class="user-box">
-                <input v-model="localUsername" required name="username" type="text">
+                <input v-model="localUsername" name="username" type="text">
                 <label>New Username</label>
             </div>
             <div class="user-box">
-                <input v-model="localEmail" required name="email" type="text">
+                <input v-model="localEmail" name="email" type="text">
                 <label>New Email</label>
             </div>
             <div class="user-box">
-                <input v-model="localPassword" required name="password" type="password">
+                <input v-model="localPassword" name="password" type="password">
                 <label>New Password</label>
             </div>
             <div class="user-box">
-                <input v-model="localConfirmPassword" required name="passwordConfirm" type="password">
+                <input v-model="localConfirmPassword" name="passwordConfirm" type="password">
                 <label>Confirm New Password</label>
             </div>
             <button type="submit">
