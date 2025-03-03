@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import Register from '@/views/Register.vue';
 import Contents from '@/views/Contents.vue';
 import About from '@/views/About.vue';
+import Settings from '@/views/Settings.vue';
 import NotFound from '@/views/NotFound.vue';
 
 const routes = [
@@ -45,6 +46,14 @@ const routes = [
     component: About,
     meta: {
       title: 'About - Mini Racers'
+    }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings,
+    meta: {
+      title: 'Settings - Mini Racers'
     }
   },
   {
