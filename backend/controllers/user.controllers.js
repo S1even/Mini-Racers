@@ -83,21 +83,30 @@ module.exports.login = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1d" }
         );
-        console.log({ message: user})
-        res.status(200).json({ message: "Connection successful", token, username: user.username });
+
+        // Renvoyer userId dans la réponse API
+        res.status(200).json({ 
+            message: "Connection successful", 
+            token, 
+            username: user.username,
+            userId: user._id // Ajouter le userId ici
+        });
     } catch (error) {
         res.status(500).json({ message: "Error connecting", error: error.message });
     }
 };
 
+
 module.exports.editUser = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
+        // Vérifier que l'utilisateur modifie bien son propre profil
         if (String(req.params.id) !== String(req.user._id)) {
             return res.status(403).json({ message: "You are not authorized to modify this user." });
         }
 
+        // Vérification du username
         if (username) {
             const existingUsername = await UserModel.findOne({ username });
             if (existingUsername && String(existingUsername._id) !== String(req.params.id)) {
@@ -105,20 +114,22 @@ module.exports.editUser = async (req, res) => {
             }
         }
 
+        // Vérification du email (éviter de supprimer l'email si non fourni)
         let emailChanged = false;
-
-        if (email) {
+        if (email !== undefined) {  // Seules les mises à jour explicites de l'email sont acceptées
             const existingEmail = await UserModel.findOne({ email });
             if (existingEmail && String(existingEmail._id) !== String(req.params.id)) {
                 return res.status(400).json({ message: "This email is already in use." });
             }
 
+            // Vérification si l'email a changé
             const user = await UserModel.findById(req.params.id);
             if (user.email !== email) {
                 emailChanged = true;
             }
         }
 
+        // Préparer les champs à mettre à jour
         const updatedFields = { ...req.body };
 
         if (password) {
@@ -126,10 +137,12 @@ module.exports.editUser = async (req, res) => {
             updatedFields.password = await bcrypt.hash(password, salt);
         }
 
+        // Si l'email a changé, le marquer comme non confirmé
         if (emailChanged) {
             updatedFields.isEmailconfirmed = false;
         }
 
+        // Mettre à jour l'utilisateur dans la base de données
         const updatedUser = await UserModel.findByIdAndUpdate(
             req.params.id,
             updatedFields,
@@ -140,6 +153,7 @@ module.exports.editUser = async (req, res) => {
             return res.status(404).json({ message: "User not found." });
         }
 
+        // Si l'email a changé, envoyer un email de confirmation
         if (emailChanged) {
             const token = jwt.sign({ userId: updatedUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
@@ -169,11 +183,13 @@ module.exports.editUser = async (req, res) => {
             });
         }
 
+        // Si tout va bien, renvoyer l'utilisateur mis à jour
         res.status(200).json(updatedUser);
     } catch (error) {
         res.status(400).json({ message: "Error during update", error: error.message });
     }
 };
+
 
 module.exports.deleteUser = async (req, res) => {
     try {

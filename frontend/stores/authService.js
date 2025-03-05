@@ -1,12 +1,13 @@
 import axios from 'axios';
+import { useAuthStore } from './authStore';
 
 export const login = async (credentials, authStore, router) => {
     try {
         const response = await axios.post('http://localhost:5500/api/auth/login', credentials);
         console.log('Réponse de l\'API de connexion :', response.data);
-        if (response.data.token && response.data.username) {
+        if (response.data.token && response.data.username && response.data.userId) { // Vérifier la présence de userId
             console.log('Utilisateur connecté :', response.data.username);
-            authStore.login(response.data.username, response.data.token); // Stockez le username dans le store
+            authStore.login(response.data.username, response.data.token, response.data.userId); // Stocker également le userId
             router.push('/'); // Rediriger vers la page d'accueil
         } else {
             console.error('Données de connexion manquantes dans la réponse.');
@@ -22,6 +23,7 @@ export const login = async (credentials, authStore, router) => {
         }
     }
 };
+
 
 export const logout = async (authStore, router) => {
     try {
@@ -52,5 +54,30 @@ export const register = async (credentials) => {
         } else {
             throw new Error("Une erreur est survenue. Veuillez réessayer");
         }
+    }
+};
+
+export const updateUserProfile = async (userData) => {
+    const authStore = useAuthStore();  // Utilisez le store Pinia
+    const token = authStore.token;  // Récupérer le token depuis le store
+    const userId = authStore.userId;  // Récupérer le userId depuis le store
+
+    // Si le userId ou token est manquant, lever une erreur
+    if (!userId || !token) {
+        throw new Error("User ID or Token is missing.");
+    }
+
+    try {
+        console.log("Updating profile for userId:", userId);  // Vérifiez que userId est défini
+
+        const response = await axios.put(`http://localhost:5500/api/auth/update/${userId}`, userData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error while updating profile: ", error);
+        throw error;
     }
 };
