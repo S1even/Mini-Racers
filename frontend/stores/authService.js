@@ -5,10 +5,10 @@ export const login = async (credentials, authStore, router) => {
     try {
         const response = await axios.post('http://localhost:5500/api/auth/login', credentials);
         console.log('Réponse de l\'API de connexion :', response.data);
-        if (response.data.token && response.data.username && response.data.userId) { // Vérifier la présence de userId
+        if (response.data.token && response.data.username && response.data.userId) {
             console.log('Utilisateur connecté :', response.data.username);
-            authStore.login(response.data.username, response.data.token, response.data.userId); // Stocker également le userId
-            router.push('/'); // Rediriger vers la page d'accueil
+            authStore.login(response.data.username, response.data.token, response.data.userId);
+            router.push('/'); 
         } else {
             console.error('Données de connexion manquantes dans la réponse.');
             throw new Error("Données de connexion manquantes.");
@@ -24,10 +24,9 @@ export const login = async (credentials, authStore, router) => {
     }
 };
 
-
 export const logout = async (authStore, router) => {
     try {
-        const token = authStore.token; // Récupérez le token depuis le store d'authentification
+        const token = authStore.token;
         if (!token) {
             throw new Error("Token is missing.");
         }
@@ -36,8 +35,8 @@ export const logout = async (authStore, router) => {
                 Authorization: `Bearer ${token}`
             }
         });
-        authStore.logout(); // Appeler la méthode de déconnexion du store
-        router.push('/login'); // Rediriger vers la page de connexion
+        authStore.logout();
+        router.push('/login');
     } catch (error) {
         console.error("Erreur lors de la déconnexion : ", error);
         throw error;
@@ -58,23 +57,28 @@ export const register = async (credentials) => {
 };
 
 export const updateUserProfile = async (userData) => {
-    const authStore = useAuthStore();  // Utilisez le store Pinia
-    const token = authStore.token;  // Récupérer le token depuis le store
-    const userId = authStore.userId;  // Récupérer le userId depuis le store
+    const authStore = useAuthStore();
+    const token = authStore.token;
+    const userId = authStore.userId;
 
-    // Si le userId ou token est manquant, lever une erreur
     if (!userId || !token) {
         throw new Error("User ID or Token is missing.");
     }
 
-    try {
-        console.log("Updating profile for userId:", userId);  // Vérifiez que userId est défini
+    const updateData = { ...userData };
+    Object.keys(updateData).forEach(key => {
+        if (updateData[key] === undefined || updateData[key] === null) {
+            delete updateData[key];
+        }
+    });
 
-        const response = await axios.put(`http://localhost:5500/api/auth/update/${userId}`, userData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
+    console.log("Données envoyées à l'API :", updateData);
+
+    try {
+        const response = await axios.put(`http://localhost:5500/api/auth/update/${userId}`, updateData, {
+            headers: { Authorization: `Bearer ${token}` }
         });
+        console.log("Réponse de l'API :", response.data);
         return response.data;
     } catch (error) {
         console.error("Error while updating profile: ", error);
