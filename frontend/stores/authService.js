@@ -81,7 +81,10 @@ export const updateUserProfile = async (userData) => {
         console.log("Réponse de l'API :", response.data);
         return response.data;
     } catch (error) {
-        console.error("Error while updating profile: ", error);
-        throw error;
+        if (error.response) {
+            throw new Error(error.response.data.message || "Une erreur est survenue. Veuillez réessayer");
+        } else {
+            throw new Error("Une erreur est survenue. Veuillez réessayer");
+        }
     }
 };

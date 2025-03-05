@@ -78,6 +78,7 @@ const handleProfileUpdate = async (updatedProfile) => {
         router.push('/');
     } catch (error) {
         errorMessage.value = error.message;
+        console.error('Error during registration:', error);
     }
 };
 </script>

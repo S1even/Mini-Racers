@@ -98,7 +98,7 @@ module.exports.login = async (req, res) => {
 
 module.exports.editUser = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password, confirmpassword } = req.body;
 
         if (String(req.params.id) !== String(req.user._id)) {
             return res.status(403).json({ message: "You are not authorized to modify this user." });
@@ -109,6 +109,10 @@ module.exports.editUser = async (req, res) => {
             if (existingUsername && String(existingUsername._id) !== String(req.params.id)) {
                 return res.status(400).json({ message: "The username is already taken." });
             }
+        }
+
+        if (password !== confirmpassword) {
+            return res.status(400).json({ message: "Passwords do not match." })
         }
 
         const updatedFields = {};
