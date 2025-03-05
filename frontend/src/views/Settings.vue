@@ -13,6 +13,7 @@
                 @update:password="updatePassword"
                 @update:confirmpassword="updateConfirmPassword"
                 @submit="handleProfileUpdate"
+                :class="{ 'fade-in': true, 'show': isMounted }"
             />
         </div>
     </div>
@@ -22,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Navbar from '@/components/navbar.vue';
 import EditProfile from '@/components/setcard.vue';
 import Footer from '@/components/footer.vue';
@@ -33,6 +34,13 @@ import { updateUserProfile } from '../../stores/authService';
 const authStore = useAuthStore();
 const errorMessage = ref('');
 const router = useRouter();
+const isMounted = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isMounted.value = true;
+  }, 150);
+});
 
 // Variables pour les données du formulaire
 const newUsername = ref(authStore.username);
@@ -40,7 +48,7 @@ const newEmail = ref(authStore.email);
 const newPassword = ref('');
 const newConfirmPassword = ref('');
 
-// Handlers pour mettre à jour les données
+//Handlers pour mettre à jour les données
 const updateUsername = (username) => {
     newUsername.value = username;
 };
@@ -67,6 +75,7 @@ const handleProfileUpdate = async (updatedProfile) => {
         await updateUserProfile(updatedData);
         authStore.login(newUsername.value, authStore.token); // Actualiser le store
         alert('Profile updated successfully!');
+        router.push('/');
     } catch (error) {
         errorMessage.value = error.message;
     }
@@ -82,12 +91,12 @@ const handleProfileUpdate = async (updatedProfile) => {
   background-color: #ffff;
 }
 
-.settings-container {
-    max-width: 800px;
-    margin: 0 auto;
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 
-.error-message {
-    color: red;
+.fade-in.show {
+  opacity: 1;
 }
 </style>
