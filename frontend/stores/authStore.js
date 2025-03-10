@@ -5,24 +5,24 @@ export const useAuthStore = defineStore("auth", {
         username: localStorage.getItem("username") || null,
         email: localStorage.getItem("email") || null,
         token: localStorage.getItem("token") || null,
-        userId: localStorage.getItem("userId") || null, // Ajoutez userId ici
+        userId: localStorage.getItem("userId") || null,
     }),
     actions: {
         login(user, token, userId) {
             this.username = user;
             this.token = token;
-            this.userId = userId; // Stockez userId dans le store
+            this.userId = userId;
             localStorage.setItem("username", user);
             localStorage.setItem("token", token);
-            localStorage.setItem("userId", userId); // Stockez userId dans localStorage
+            localStorage.setItem("userId", userId);
         },
         logout() {
             this.username = null;
             this.token = null;
-            this.userId = null; // Supprimez userId à la déconnexion
+            this.userId = null;
             localStorage.removeItem("username");
             localStorage.removeItem("token");
-            localStorage.removeItem("userId"); // Supprimez userId de localStorage
+            localStorage.removeItem("userId");
         },
     },
 });
