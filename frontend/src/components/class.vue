@@ -4,21 +4,40 @@
     <div class="card-details">
       <p class="text-title">{{ className }}</p>
     </div>
-    <button class="card-button">More info</button>
+    <button class="card-button" @click="redirectToPage">More info</button>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   className: String,
   image: String,
 });
 
+const router = useRouter();
+
 const imageSrc = computed(() => {
   return new URL(`../assets/${props.image}.png`, import.meta.url).href;
 });
+
+const redirectToPage = () => {
+  const routes = {
+    ClassA: '/contents/class-a',
+    ClassB: '/contents/class-b',
+    ClassC: '/contents/class-c',
+    ClassD: '/contents/class-d',
+    ClassE: '/contents/class-e',
+    ClassExtra: '/contents/class-extra',
+  };
+
+  const destination = routes[props.image];
+  if (destination) {
+    router.push(destination);
+  }
+};
 </script>
 
 <style scoped>
@@ -74,6 +93,7 @@ const imageSrc = computed(() => {
   bottom: 0;
   opacity: 0;
   transition: 0.3s ease-out;
+  cursor: pointer;
 }
 
 .text-title {
