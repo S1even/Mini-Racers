@@ -34,7 +34,7 @@
 
 <script setup>
 import Carte from '@/components/carte.vue';
-import Class from '@/components/classA.vue';
+import Class from '@/components/class.vue';
 import Navbar from '@/components/navbar.vue';
 import carousel from '@/components/carousel.vue';
 import Footer from '@/components/footer.vue';
@@ -53,11 +53,11 @@ const cards = [
     },
     {
         className: 'Class C',
-        image: 'Classcmenu',
+        image: 'ClassC',
     },
     {
         className: 'Class D',
-        image: 'Classd',
+        image: 'ClassD',
     },
     {
         className: 'Class E',
@@ -65,7 +65,7 @@ const cards = [
     },
     {
         className: 'Class Extra',
-        image: 'Extra',
+        image: 'ClassExtra',
     },
 ];
 
