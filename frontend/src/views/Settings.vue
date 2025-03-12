@@ -1,0 +1,103 @@
+<template>
+    <div class="settings-page">
+        <Navbar />
+        <div class="settings-container">
+            <EditProfile 
+                :username="authStore.username"
+                :email="authStore.email"
+                :password="authStore.password"
+                :confirmpassword="authStore.password"
+                :errorMessage="errorMessage"
+                @update:username="updateUsername"
+                @update:email="updateEmail"
+                @update:password="updatePassword"
+                @update:confirmpassword="updateConfirmPassword"
+                @submit="handleProfileUpdate"
+                :class="{ 'fade-in': true, 'show': isMounted }"
+            />
+        </div>
+    </div>
+    <div>
+        <Footer />
+    </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import Navbar from '@/components/navbar.vue';
+import EditProfile from '@/components/setcard.vue';
+import Footer from '@/components/footer.vue';
+import { useAuthStore } from '../../stores/authStore';
+import { useRouter } from 'vue-router';
+import { updateUserProfile } from '../../stores/authService';
+
+const authStore = useAuthStore();
+const errorMessage = ref('');
+const router = useRouter();
+const isMounted = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isMounted.value = true;
+  }, 150);
+});
+
+// Variables pour les données du formulaire
+const newUsername = ref(authStore.username);
+const newEmail = ref(authStore.email);
+const newPassword = ref('');
+const newConfirmPassword = ref('');
+
+//Handlers pour mettre à jour les données
+const updateUsername = (username) => {
+    newUsername.value = username;
+};
+const updateEmail = (email) => {
+    newEmail.value = email;
+};
+const updatePassword = (password) => {
+    newPassword.value = password;
+};
+const updateConfirmPassword = (confirmpassword) => {
+    newConfirmPassword.value = confirmpassword;
+};
+
+// Soumettre les modifications au backend
+const handleProfileUpdate = async (updatedProfile) => {
+    const updatedData = {
+        username: newUsername.value,
+        email: newEmail.value,
+        password: newPassword.value,
+        confirmpassword: newConfirmPassword.value
+    };
+
+    try {
+        await updateUserProfile(updatedData);
+        authStore.login(newUsername.value, authStore.token); // Actualiser le store
+        alert('Profile updated successfully!');
+        router.push('/');
+    } catch (error) {
+        errorMessage.value = error.message;
+        console.error('Error during registration:', error);
+    }
+};
+</script>
+
+<style scoped>
+.settings-page {
+  height: 100vh;
+  background-image: url('@/assets/Designer2.png');
+  background-size: cover;
+  background-position: center;
+  background-color: #ffff;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+}
+</style>
