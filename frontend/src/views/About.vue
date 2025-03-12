@@ -39,7 +39,7 @@ const people = [
     { name: 'Steven', role: 'Game Developper & Map Designer', photo: 'steven', github: 'https://github.com/S1even', linkedin: 'https://www.linkedin.com/in/steven-devin-107849246/' },
     { name: 'Morgan', role: 'Developper fullstack & Map Designer', photo: 'morgan', github: 'https://github.com/Morg92b', linkedin: 'https://www.linkedin.com/in/morgan-bouaziz-50a2811b6/' },
     { name: 'Scotty', role: 'Game Developper', photo: 'scotty', github: 'https://github.com/scotty800', linkedin: 'https://www.linkedin.com/in/scotty-ndanga-5a24aa1b0/' },
-    { name: 'Dylan', role: 'Developper front-end', photo: 'scotty', github: 'https://github.com/Bruqui', linkedin: 'https://www.linkedin.com/in/dylan-gros-desormeaux-a24044348/' },
+    { name: 'Dylan', role: 'Developper front-end', photo: 'dylan', github: 'https://github.com/Bruqui', linkedin: 'https://www.linkedin.com/in/dylan-gros-desormeaux-a24044348/' },
     { name: 'Yannis', role: 'Developper', photo: 'yannis', github: 'https://github.com/Yannis95200', linkedin: 'https://www.linkedin.com/in/yannis-ranguin-9798aa192/' }
 ];
 
