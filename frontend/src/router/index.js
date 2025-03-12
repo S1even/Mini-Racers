@@ -6,6 +6,12 @@ import Contents from '@/views/Contents.vue';
 import About from '@/views/About.vue';
 import Settings from '@/views/Settings.vue';
 import NotFound from '@/views/NotFound.vue';
+import ClassB from '@/views/ClassB.vue';
+import ClassA from '@/views/ClassA.vue';
+import ClassC from '@/views/ClassC.vue';
+import ClassD from '@/views/ClassD.vue';
+import ClassE from '@/views/ClassE.vue';
+import ClassExtra from '@/views/ClassExtra.vue';
 
 const routes = [
   {
@@ -54,6 +60,54 @@ const routes = [
     component: Settings,
     meta: {
       title: 'Settings - Mini Racers'
+    }
+  },
+  {
+    path: '/contents/class-a',
+    name: 'Class-A',
+    component: ClassA, 
+    meta: {
+      title: 'Class-A - Mini Racers'
+    }
+  },
+  {
+    path: '/contents/class-b',
+    name: 'Class-B',
+    component: ClassB, 
+    meta: {
+      title: 'Class-B - Mini Racers'
+    }
+  },
+  {
+    path: '/contents/class-c',
+    name: 'Class-C',
+    component: ClassC, 
+    meta: {
+      title: 'Class-C - Mini Racers'
+    }
+  },
+  {
+    path: '/contents/class-d',
+    name: 'Class-D',
+    component: ClassD, 
+    meta: {
+      title: 'Class-D - Mini Racers'
+    }
+  },
+  {
+    path: '/contents/class-e',
+    name: 'Class-E',
+    component: ClassE, 
+    meta: {
+      title: 'Class-E - Mini Racers'
+    }
+  },
+  {
+    path: '/contents/class-extra',
+    name: 'Class-Extra',
+    component: ClassExtra, 
+    meta: {
+      title: 'Class-Extra - Mini Racers'
     }
   },
   {
