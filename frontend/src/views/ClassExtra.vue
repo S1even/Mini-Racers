@@ -31,27 +31,27 @@ const ClassExtraCars = ref([
     {
         name: "Nessus",
         image: Nessus,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Nessus is a rugged, versatile tow truck designed for drivers who enjoy challenges and unexpected situations. Its recovery truck-inspired design, with beige bodywork and specific equipment, gives it a unique, functional look. Its powerful engine and robust suspension make it capable of towing other vehicles and overcoming all obstacles, perfect for off-road racing and extreme challenges. The Nessus is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
     {
         name: "Palma-372",
         image: Palma,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Palma is a rugged, versatile fire truck designed for drivers who love challenges and emergency situations. Its firetruck-inspired design, with red bodywork and special equipment, gives it a unique, functional look. Its powerful engine and robust suspension make it a car capable of overcoming any obstacle, perfect for off-road racing and extreme challenges. The Palma is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
     {
         name: "Quaoar",
         image: Quaoar,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Quaoar is a fast, versatile ambulance designed for drivers who love challenges and emergency situations. Its emergency vehicle-inspired design, with its white bodywork and specific equipment, gives it a unique, functional look. Its responsive engine and robust suspension make it a car capable of intervening quickly and overcoming all obstacles, perfect for races against the clock and extreme challenges. The Quaoar is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
     {
         name: "Talos",
         image: Talos,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Talos is a rugged, secure armored van designed for drivers who enjoy challenges and high-risk situations. Its design, inspired by cash-in-transit vehicles, with its armored body and specific equipment, gives it a unique and intimidating allure. Its powerful engine and reinforced suspension make it a car capable of withstanding all shocks and overcoming all obstacles, perfect for high-risk racing and extreme challenges. The Talos is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
     {
         name: "Ursula-375",
         image: Ursula,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Ursula is a robust, versatile forklift designed for drivers who enjoy challenges and atypical situations. Its industrial forklift-inspired design, with its yellow bodywork and specific equipment, gives it a unique, functional look. Its simple engine and precise handling make it a car capable of carrying loads and overcoming obstacles, perfect for atypical races and original challenges. The Ursula is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
 ]);
 </script>

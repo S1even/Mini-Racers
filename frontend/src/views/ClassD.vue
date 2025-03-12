@@ -31,27 +31,27 @@ const ClassDCars = ref([
     {
         name: "Halley",
         image: Halley,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Halley is a fun, quirky buggy designed for fun-loving drivers who like to explore. Its unique, colorful design, with its candy-pink bodywork, gives it an original and endearing allure. Its simple engine and easy handling make it a pleasure to drive, perfect for relaxed races and challenges with friends. The Halley is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
     {
         name: "Luna",
         image: Luna,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Luna is a compact, agile car designed for drivers who like simplicity and efficiency. Its sleek, modern design, with its white bodywork and discreet lines, gives it a unique, timeless allure. Its simple engine and easy handling make it a pleasure to drive, perfect for relaxed races and challenges with friends. The Luna is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
     {
         name: "Pluton",
         image: Pluton,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Pluton is a nimble, economical little city car, designed for riders who like to zip around town. Its compact, colorful design, with red bodywork and white roof, gives it a friendly, practical look. Its simple engine and easy handling make it a pleasure to drive, perfect for relaxed races and challenges with friends. The Pluton is a versatile car, ideal for drivers who like to vary the pleasures.",
     },
     {
         name: "Sirius",
         image: Sirius,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Sirius is a compact, sporty car designed for drivers who love speed and handling. Its dynamic, colorful design, with bright green bodywork and black accents, gives it a unique, modern look. Its responsive engine and precise handling make it a pleasure to drive, capable of dominating winding circuits and urban races. The Sirius is a versatile car, ideal for drivers who like to vary their pleasures.",
     },
     {
         name: "Supernova",
         image: Supernova,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        description: "The Supernova is a compact, versatile car designed for drivers who like simplicity and efficiency. Its sober, functional design, with its red bodywork and discreet lines, gives it a timeless allure. Its simple engine and easy handling make it a pleasure to drive, perfect for relaxed races and challenges with friends. The Supernova is a versatile car, ideal for drivers who like to vary the pleasures.",
     },
 ]);
 </script>
