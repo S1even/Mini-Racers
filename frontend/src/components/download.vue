@@ -19,7 +19,7 @@ const isAuthenticated = computed(() => !!authStore.token);
 
 const downloadFile = () => {
   // Remplace avec l'URL de ton fichier
-  window.location.href = "https://drive.google.com/file/d/1fzopuzASCf8w8fmP3QZxRFM0wFRSqxVA/view?usp=sharing";
+  window.location.href = "https://drive.google.com/drive/u/3/folders/1Jze32y9BgvrvcKYuRGH-pBnCYUIwUMSf";
 };
 
 const redirectToLogin = () => {

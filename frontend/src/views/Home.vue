@@ -6,7 +6,7 @@
         :image="carte.image" :key="index" :class="'cartes-' + index + ' fade-in' + (isMounted ? ' show' : '')" />
     </div>
     <Download :isAuthenticated="isLoggedIn"
-      fileUrl="https://drive.google.com/file/d/1fzopuzASCf8w8fmP3QZxRFM0wFRSqxVA/view?usp=sharing" />
+      fileUrl="https://drive.google.com/drive/u/3/folders/1Jze32y9BgvrvcKYuRGH-pBnCYUIwUMSf" />
   </div>
   <Footer />
 </template>
