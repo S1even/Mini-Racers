@@ -82,11 +82,11 @@ export const updateUserProfile = async (userData) => {
 
         if (responseUpdate.data.logout) {
             authStore.logout();
-            alert('Votre email a été mis à jour. Vous devez confirmer votre email. Vous êtes maintenant déconnecté.');
+            alert('Votre profil a été mis à jour. Vous êtes maintenant déconnecté.');
             console.log('Déconnexion effectuée.');
-            router.push('/login'); // Utiliser router.push au lieu de window.location.href
+            router.push('/login'); // Rediriger vers la page de connexion
         } else {
-            alert('Email mis à jour avec succès.');
+            alert('Profil mis à jour avec succès.');
         }
 
         return responseUpdate.data;
