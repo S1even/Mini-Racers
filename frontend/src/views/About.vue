@@ -16,8 +16,7 @@
             </div>
             <div class="last-card-container">
                 <p :class="{ 'last-card-text': true, 'fade-in': true, 'show': isSecondTextMounted }">
-                    Un grand merci à Yannis pour avoir contribué au projet en nous concoctant une musique pour nos
-                    circuits.
+                    Many thanks to Yannis for contributing to the project by creating music for our tours.
                 </p>
             </div>
             <div class="last-card-container">
