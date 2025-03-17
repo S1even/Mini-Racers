@@ -13,7 +13,7 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://mini-racers-git-main-s1evens-projects.vercel.app'],
     credentials: true,
 }));
 
