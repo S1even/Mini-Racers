@@ -58,11 +58,12 @@ export const register = async (credentials) => {
 
 export const updateUserProfile = async (userData) => {
     const authStore = useAuthStore();
+    authStore.checkTokenExpiration();
     const token = authStore.token;
     const userId = authStore.userId;
 
     if (!userId || !token) {
-        throw new Error("User ID or Token is missing.");
+        throw new Error("User ID ou Token manquant.");
     }
 
     const updateData = { ...userData };
@@ -72,14 +73,23 @@ export const updateUserProfile = async (userData) => {
         }
     });
 
-    console.log("Données envoyées à l'API :", updateData);
-
     try {
-        const response = await axios.put(`http://localhost:5500/api/auth/update/${userId}`, updateData, {
+        const responseUpdate = await axios.put(`http://localhost:5500/api/auth/update/${userId}`, updateData, {
             headers: { Authorization: `Bearer ${token}` }
         });
-        console.log("Réponse de l'API :", response.data);
-        return response.data;
+
+        console.log(responseUpdate.data); // Pour vérifier la réponse
+
+        if (responseUpdate.data.logout) {
+            authStore.logout();
+            alert('Votre email a été mis à jour. Vous devez confirmer votre email. Vous êtes maintenant déconnecté.');
+            console.log('Déconnexion effectuée.');
+            router.push('/login'); // Utiliser router.push au lieu de window.location.href
+        } else {
+            alert('Email mis à jour avec succès.');
+        }
+
+        return responseUpdate.data;
     } catch (error) {
         if (error.response) {
             throw new Error(error.response.data.message || "Une erreur est survenue. Veuillez réessayer");
@@ -88,3 +98,5 @@ export const updateUserProfile = async (userData) => {
         }
     }
 };
+
+

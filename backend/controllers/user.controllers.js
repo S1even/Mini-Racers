@@ -132,7 +132,7 @@ module.exports.editUser = async (req, res) => {
             const user = await UserModel.findById(req.params.id);
             if (user.email !== email) {
                 emailChanged = true;
-                updatedFields.isEmailconfirmed = false;
+                updatedFields.isEmailconfirmed = false; // Email non confirmé après modification
             }
         }
 
@@ -142,6 +142,7 @@ module.exports.editUser = async (req, res) => {
         }
 
         if (emailChanged) {
+            // Invalider le token si l'email n'est pas confirmé
             const token = jwt.sign({ userId: updatedUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
             const transporter = nodemailer.createTransport({
@@ -164,14 +165,19 @@ module.exports.editUser = async (req, res) => {
             };
 
             await transporter.sendMail(mailOptions);
-            return res.status(200).json({ message: "User updated. Please check your new email to confirm." });
+            return res.status(200).json({ 
+                message: "User updated. Please check your new email to confirm.", 
+                logout: true 
+            });
         }
 
+        
         res.status(200).json(updatedUser);
     } catch (error) {
         res.status(400).json({ message: "Error during update", error: error.message });
     }
 };
+
 
 module.exports.deleteUser = async (req, res) => {
     try {

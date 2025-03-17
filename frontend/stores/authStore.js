@@ -24,5 +24,17 @@ export const useAuthStore = defineStore("auth", {
             localStorage.removeItem("token");
             localStorage.removeItem("userId");
         },
-    },
+
+checkTokenExpiration() {
+    const token = this.token;
+    if (!token) return;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const exp = payload.exp * 1000;
+
+    if (exp < Date.now()) {
+        this.logout();
+        }
+    }
+},
 });
