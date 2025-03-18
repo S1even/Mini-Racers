@@ -1,7 +1,7 @@
 <template>
     <div class="container-pag">
-        <a :href="prevLink" class="button-pag" v-if="prevLink">Previous</a>
-        <a :href="nextLink" class="button-pag" v-if="nextLink">Next</a>
+        <router-link :to="prevLink" class="button-pag" v-if="prevLink">Previous</router-link>
+        <router-link :to="nextLink" class="button-pag" v-if="nextLink">Next</router-link>
     </div>
 </template>
 
