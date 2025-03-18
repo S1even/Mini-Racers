@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useAuthStore } from './authStore';
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const login = async (credentials, authStore, router) => {
     try {
-        const response = await axios.post('http://localhost:5500/api/auth/login', credentials);
+        const response = await axios.post(`${BASE_URL}/login`, credentials);
         console.log('Réponse de l\'API de connexion :', response.data);
         if (response.data.token && response.data.username && response.data.userId) {
             console.log('Utilisateur connecté :', response.data.username);
@@ -30,7 +32,7 @@ export const logout = async (authStore, router) => {
         if (!token) {
             throw new Error("Token is missing.");
         }
-        await axios.post('http://localhost:5500/api/auth/logout', {}, {
+        await axios.post(`${BASE_URL}/logout`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -45,7 +47,7 @@ export const logout = async (authStore, router) => {
 
 export const register = async (credentials) => {
     try {
-        const response = await axios.post('http://localhost:5500/api/auth/register', credentials);
+        const response = await axios.post(`${BASE_URL}/register`, credentials);
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -68,13 +70,13 @@ export const updateUserProfile = async (userData) => {
 
     const updateData = { ...userData };
     Object.keys(updateData).forEach(key => {
-        if (updateData[key] === undefined || updateData[key] === null) {
+        if (updateData[key] === undefined || null) {
             delete updateData[key];
         }
     });
 
     try {
-        const responseUpdate = await axios.put(`http://localhost:5500/api/auth/update/${userId}`, updateData, {
+        const responseUpdate = await axios.put(`${BASE_URL}/update/${userId}`, updateData, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -98,5 +100,3 @@ export const updateUserProfile = async (userData) => {
         }
     }
 };
-
-
