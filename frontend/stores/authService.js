@@ -5,7 +5,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const login = async (credentials, authStore, router) => {
     try {
-        const response = await axios.post(`${BASE_URL}/login`, credentials);
+        const response = await axios.post(`${BASE_URL}/api/auth/login`, credentials);
         console.log('Réponse de l\'API de connexion :', response.data);
         if (response.data.token && response.data.username && response.data.userId) {
             console.log('Utilisateur connecté :', response.data.username);
@@ -32,7 +32,7 @@ export const logout = async (authStore, router) => {
         if (!token) {
             throw new Error("Token is missing.");
         }
-        await axios.post(`${BASE_URL}/logout`, {}, {
+        await axios.post(`${BASE_URL}/api/auth/logout`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -47,7 +47,7 @@ export const logout = async (authStore, router) => {
 
 export const register = async (credentials) => {
     try {
-        const response = await axios.post(`${BASE_URL}/register`, credentials);
+        const response = await axios.post(`${BASE_URL}/api/auth/register`, credentials);
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -76,7 +76,7 @@ export const updateUserProfile = async (userData) => {
     });
 
     try {
-        const responseUpdate = await axios.put(`${BASE_URL}/update/${userId}`, updateData, {
+        const responseUpdate = await axios.put(`${BASE_URL}/api/auth/update/${userId}`, updateData, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
