@@ -39,8 +39,8 @@ You can download [Mini Racers here](https://drive.google.com/drive/u/3/folders/1
 | Bcrypt   | Vue.js 3 + Vite |
 | Cors     | Axios           |
 | Express  | Pinia           |
-| Mongoose | Bundle vite     |
-| Nodemon  |                 |
+| Mongoose |
+| Nodemon  |
 
 ## Communication
 
