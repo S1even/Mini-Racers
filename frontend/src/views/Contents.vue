@@ -117,7 +117,6 @@ onMounted(() => {
 }
 
 .Homepage {
-    height: 60vh;
     background-size: cover;
     background-position: center;
     background-color: #153c75;
@@ -126,6 +125,7 @@ onMounted(() => {
 .Homepage p {
     text-align: center;
     color: #fff;
+    margin-bottom: 0;
 }
 
 .textclass {
@@ -157,7 +157,6 @@ onMounted(() => {
     background-color: #f8b05d;
     background-size: cover;
     background-position: center;
-    height: 80vh;
     position: relative;
     overflow: hidden;
 }
