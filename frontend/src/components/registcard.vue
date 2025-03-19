@@ -28,7 +28,7 @@
             </button>
         </form>
         <p v-if="localErrorMessage" class="error-message">{{ localErrorMessage }}</p>
-        <p>Already have an account? <a href="/login" class="a2">Sign-in!</a></p>
+        <p>Already have an account? <router-link to="/login" class="a2">Sign-in!</router-link></p>
     </div>
 </template>
 

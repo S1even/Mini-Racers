@@ -20,7 +20,7 @@
             </button>
         </form>
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-        <p>Don't have an account? <a href="/register" class="a2">Sign up!</a></p>
+        <p>Don't have an account? <router-link to="/register" class="a2">Sign up!</router-link></p>
     </div>
 </template>
 
