@@ -59,4 +59,22 @@ const props = defineProps({
     overflow-wrap: break-word;
     padding: 0 10px;
 }
+
+@media (max-width: 768px) {
+    .section-cars {
+        flex-direction: column !important;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .cars {
+        height: 500px;
+    }
+    .section-text-cars {
+        padding: 0 20px;
+        text-align: center;
+    }
+    .CarsSection p {
+        width: 300px;
+    }
+}
 </style>
